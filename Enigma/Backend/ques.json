@@ -1,0 +1,122 @@
+[
+  {
+    "id": "q1",
+    "question_no": 1,
+    "question": "What is the capital of France?",
+    "options": ["Berlin", "Madrid", "Paris", "Rome"],
+    "correct_answer": "Paris"
+  },
+  {
+    "id": "q2",
+    "question_no": 2,
+    "question": "Which language runs in a web browser?",
+    "options": ["Java", "C", "Python", "JavaScript"],
+    "correct_answer": "JavaScript"
+  },
+  {
+    "id": "q3",
+    "question_no": 3,
+    "question": "What does CSS stand for?",
+    "options": [
+      "Central Style Sheets",
+      "Cascading Style Sheets",
+      "Computer Style Sheets",
+      "Creative Style System"
+    ],
+    "correct_answer": "Cascading Style Sheets"
+  },
+  {
+    "id": "q4",
+    "question_no": 4,
+    "question": "Which HTML tag is used to define an internal style sheet?",
+    "options": ["<css>", "<script>", "<style>", "<link>"],
+    "correct_answer": "<style>"
+  },
+  {
+    "id": "q5",
+    "question_no": 5,
+    "question": "Which company developed the React library?",
+    "options": ["Google", "Microsoft", "Facebook", "Amazon"],
+    "correct_answer": "Facebook"
+  },
+  {
+    "id": "q6",
+    "question_no": 6,
+    "question": "Which HTML attribute specifies an alternate text for an image?",
+    "options": ["alt", "title", "src", "href"],
+    "correct_answer": "alt"
+  },
+  {
+    "id": "q7",
+    "question_no": 7,
+    "question": "What does JSON stand for?",
+    "options": [
+      "Java Standard Output Notation",
+      "JavaScript Object Notation",
+      "JavaScript Output Notation",
+      "Java Serialized Object Notation"
+    ],
+    "correct_answer": "JavaScript Object Notation"
+  },
+  {
+    "id": "q8",
+    "question_no": 8,
+    "question": "Which company developed TypeScript?",
+    "options": ["Google", "Microsoft", "Facebook", "Apple"],
+    "correct_answer": "Microsoft"
+  },
+  {
+    "id": "q9",
+    "question_no": 9,
+    "question": "Which HTML element is used to define a list item?",
+    "options": ["<ul>", "<li>", "<ol>", "<list>"],
+    "correct_answer": "<li>"
+  },
+  {
+    "id": "q10",
+    "question_no": 10,
+    "question": "Which of the following is a JavaScript framework?",
+    "options": ["Laravel", "Django", "Vue.js", "Rails"],
+    "correct_answer": "Vue.js"
+  },
+  {
+    "id": "q11",
+    "question_no": 11,
+    "question": "Which of the following is used for version control?",
+    "options": ["Git", "Node.js", "React", "Docker"],
+    "correct_answer": "Git"
+  },
+  {
+    "id": "q12",
+    "question_no": 12,
+    "question": "In JavaScript, which keyword is used to declare a constant variable?",
+    "options": ["var", "let", "const", "static"],
+    "correct_answer": "const"
+  },
+  {
+    "id": "q13",
+    "question_no": 13,
+    "question": "Which method converts a JSON string into a JavaScript object?",
+    "options": ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.object()"],
+    "correct_answer": "JSON.parse()"
+  },
+  {
+    "id": "q14",
+    "question_no": 14,
+    "question": "Which CSS property is used to change the text color?",
+    "options": ["text-color", "color", "font-color", "font-style"],
+    "correct_answer": "color"
+  },
+  {
+    "id": "q15",
+    "question_no": 15,
+    "question": "What is the purpose of the Node.js runtime?",
+    "options": [
+      "To run JavaScript in the browser",
+      "To run JavaScript on the server",
+      "To compile Java code",
+      "To style web pages"
+    ],
+    "correct_answer": "To run JavaScript on the server"
+  }
+]
