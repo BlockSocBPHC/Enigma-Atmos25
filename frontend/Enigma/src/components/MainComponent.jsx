@@ -1,95 +1,182 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Blocnum from './Blocnum.jsx';
 
 const MainContent = () => {
-  const [question, setQuestion] = useState({
-    text: "What is 2 + 2 * 2?",
-    type: "integer"
-  });
-  
-  const [tokenInput, setTokenInput] = useState(10);
+  const [blocks, setBlocks] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [answer, setAnswer] = useState('');
   const [tokens, setTokens] = useState(1000);
   const [reward, setReward] = useState(0);
+  const [tokenInput, setTokenInput] = useState('');
+
+  const [miningTimeLeft, setMiningTimeLeft] = useState(0);
+  const [isMining, setIsMining] = useState(false);
 
   const baseTokens = 10;
   const baseTimeSecondsForTenTokens = 60;
+
   const numericTokenInput = tokenInput === '' ? NaN : Number(tokenInput);
   const isBelowBase = Number.isFinite(numericTokenInput) && numericTokenInput < baseTokens;
   const safeTokens = Number.isFinite(numericTokenInput) ? Math.max(baseTokens, numericTokenInput) : baseTokens;
   const miningSeconds = Math.ceil((10 / safeTokens) * baseTimeSecondsForTenTokens);
   const hasEnoughTokens = Number.isFinite(numericTokenInput) && numericTokenInput <= tokens;
 
-  const handleStartMining = () => {
-    if (!Number.isFinite(numericTokenInput) || isBelowBase || !hasEnoughTokens) return;
-    setTokens((prev) => Math.max(0, prev - numericTokenInput));
-    setReward((prev) => prev + 5);
+  const fetchNewQuestion = async () => {
+    try {
+      const usedIds = blocks.map(b => b.id);
+      const res = await fetch('http://localhost:4000/getquestions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(usedIds),
+      });
+      const data = await res.json();
+      setCurrentQuestion(data);
+      setAnswer('');
+    } catch (err) {
+      console.error('Failed to fetch new question:', err);
+    }
   };
+
+  useEffect(() => {
+    fetchNewQuestion();
+  }, []);
+
+  const checkAnswer = () => {
+    if (!currentQuestion || !answer.trim()) return false;
+    return answer.trim() === currentQuestion.correct_answer;
+  };
+
+ const handleStartMining = () => {
+  if (!currentQuestion || !answer.trim()) return;
+  if (!Number.isFinite(numericTokenInput) || isBelowBase || !hasEnoughTokens) return;
+
+  setTokens(prev => prev - numericTokenInput);
+  setIsMining(true);
+  setMiningTimeLeft(miningSeconds);
+
+  // Check if a block for this question already exists
+  const existingBlock = blocks.find(b => b.questionId === currentQuestion.id);
+
+  let blockId;
+  if (existingBlock) {
+    blockId = existingBlock.id;
+    // Reset status to pending for retry
+    setBlocks(prevBlocks =>
+      prevBlocks.map(b => 
+        b.id === blockId ? { ...b, status: 'pending' } : b
+      )
+    );
+  } else {
+    blockId = blocks.length + 1;
+    const newBlock = {
+      id: blockId,
+      status: 'pending',
+      answer: currentQuestion.correct_answer,
+      timestamp: new Date().toLocaleTimeString(),
+      questionId: currentQuestion.id,
+    };
+    setBlocks(prev => [...prev, newBlock]);
+  }
+
+  const interval = setInterval(() => {
+    setMiningTimeLeft(prev => {
+      if (prev <= 1) {
+        clearInterval(interval);
+        const correct = checkAnswer();
+
+        // Update block status
+        setBlocks(prevBlocks =>
+          prevBlocks.map(b =>
+            b.id === blockId ? { ...b, status: correct ? 'success' : 'failed' } : b
+          )
+        );
+
+        if (correct) {
+          setReward(prev => prev + 5);
+          fetchNewQuestion(); // fetch next question only if correct
+        }
+
+        setAnswer('');
+        setTokenInput('');
+        setIsMining(false);
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
+};
+
 
   return (
     <div className="flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6 p-4 sm:p-8 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-300">
-      
 
-      <div className="lg:col-span-3 rounded-2xl p-6 sm:p-8 bg-gray-900/60 backdrop-blur-md border border-gray-700/40 shadow-xl ring-1 ring-white/10">
-
+      {/* Blockchain visualization */}
+      <div className="lg:col-span-3 rounded-2xl p-6 sm:p-8 bg-gray-900/60 border border-gray-700/40 shadow-xl ring-1 ring-white/10">
+        <Blocnum blocks={blocks} />
       </div>
 
-
-      <div className="lg:col-span-1 rounded-2xl p-6 sm:p-7 bg-gray-900/60 backdrop-blur-md border border-gray-700/40 shadow-xl ring-1 ring-white/10 flex flex-col justify-center">
-        <h3 className="text-lg font-semibold text-gray-400 mb-2 tracking-wide">Your Tokens</h3>
-        <p className="text-5xl sm:text-6xl font-extrabold tracking-tight text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.12)]">{tokens.toLocaleString()}</p>
-        <h3 className="text-lg font-semibold text-gray-400 mt-6 mb-2 tracking-wide">Total Reward</h3>
-        <p className="text-5xl sm:text-6xl font-extrabold tracking-tight text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.12)]">{reward}</p>
+      {/* Tokens and reward */}
+      <div className="lg:col-span-1 rounded-2xl p-6 sm:p-7 bg-gray-900/60 border border-gray-700/40 shadow-xl ring-1 ring-white/10 flex flex-col justify-center">
+        <h3 className="text-lg font-semibold text-gray-400 mb-2">Your Tokens</h3>
+        <p className="text-6xl font-extrabold text-green-400">{tokens}</p>
+        <h3 className="text-lg font-semibold text-gray-400 mt-6 mb-2">Total Reward</h3>
+        <p className="text-6xl font-extrabold text-yellow-400">{reward}</p>
       </div>
 
-      <div className="lg:col-span-3 rounded-2xl p-6 sm:p-8 bg-gray-900/60 backdrop-blur-md border border-gray-700/40 shadow-xl ring-1 ring-white/10 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-gray-400 tracking-wide">Question of the Block</h3>
-        <p className="text-3xl sm:text-4xl my-6 text-white font-semibold tracking-tight">{question.text}</p>
-        <input
-          type="text"
-          placeholder="Enter your answer"
-          className="w-3xs p-3 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400/80 text-base shadow-inner shadow-black/20 hover:border-gray-500 focus:ring-2 focus:ring-blue-500/70 focus:outline-none transition-all"
-        />
+      {/* Question area */}
+      <div className="lg:col-span-3 rounded-2xl p-6 sm:p-8 bg-gray-900/60 border border-gray-700/40 shadow-xl ring-1 ring-white/10 flex flex-col justify-center">
+        <h3 className="text-xl font-semibold text-gray-400">Question of the Block</h3>
+        {currentQuestion ? (
+          <>
+            <p className="text-3xl my-6 text-white font-semibold">{currentQuestion.question}</p>
+            <div className="flex flex-col gap-2">
+              {currentQuestion.options?.map(opt => (
+                <button
+                  key={opt}
+                  className={`p-3 rounded-lg text-white text-lg border border-gray-600 
+                    ${answer === opt ? 'bg-blue-600' : 'bg-gray-800'}`}
+                  onClick={() => setAnswer(opt)}
+                  disabled={isMining}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p>Loading question...</p>
+        )}
       </div>
 
-      <div className="lg:col-span-1 rounded-2xl p-6 sm:p-7 bg-gray-900/60 backdrop-blur-md border border-gray-700/40 shadow-xl ring-1 ring-white/10 flex flex-col gap-4">
-        <h3 className="text-xl font-semibold text-gray-400 tracking-wide">Mine Controls</h3>
+      {/* Mining controls */}
+      <div className="lg:col-span-1 rounded-2xl p-6 sm:p-7 bg-gray-900/60 border border-gray-700/40 shadow-xl ring-1 ring-white/10 flex flex-col gap-4">
+        <h3 className="text-xl font-semibold text-gray-400">Mine Controls</h3>
+
         <div className="flex justify-between text-base mt-2">
           <div>Est. Time:</div>
-          <div className="font-semibold text-white">{Number.isFinite(numericTokenInput) ? `${miningSeconds}s` : '--'}</div>
+          <div className="font-semibold text-white">{miningSeconds}s</div>
         </div>
-        <div className="flex justify-between text-base pt-2 border-t border-gray-700/40">
-          <div>Minimum to mine:</div>
-          <div className="font-semibold text-white">{baseTokens}</div>
-        </div>
+
         <div>
-           <label className="block text-sm text-gray-400">Tokens to mine</label>
-           <input
+          <label className="block text-sm text-gray-400">Tokens to mine</label>
+          <input
             type="number"
             min={baseTokens}
+            placeholder="" // removed default 0
             value={tokenInput}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val === '') {
-                setTokenInput('');
-              } else {
-                setTokenInput(Number(val));
-              }
-            }}
-            className="mt-1 w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400/80 text-base shadow-inner shadow-black/20 hover:border-gray-500 focus:ring-2 focus:ring-blue-500/70 focus:outline-none transition-all"
+            onChange={e => setTokenInput(e.target.value)}
+            className="mt-1 w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white"
+            disabled={isMining}
           />
         </div>
-        {Number.isFinite(numericTokenInput) && isBelowBase && (
-          <div className="text-sm text-red-400">Minimum to mine is {baseTokens} tokens.</div>
-        )}
-        {Number.isFinite(numericTokenInput) && !isBelowBase && !hasEnoughTokens && (
-          <div className="text-sm text-red-400">Not enough tokens available.</div>
-        )}
+
         <button
           type="button"
           onClick={handleStartMining}
-          disabled={!Number.isFinite(numericTokenInput) || isBelowBase || !hasEnoughTokens}
-          className="mt-auto w-full inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-white font-bold shadow-lg shadow-blue-900/30 hover:from-blue-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          disabled={isMining || !hasEnoughTokens || !answer.trim()}
+          className="mt-auto w-full rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-white font-bold hover:from-blue-500 hover:to-indigo-500 disabled:opacity-50 transition"
         >
-          Start Mining
+          {isMining ? `Mining... ${miningTimeLeft}s` : 'Start Mining'}
         </button>
       </div>
     </div>
