@@ -131,9 +131,7 @@ app.post('/checkans', authenticateToken, async (req, res) => {
         // console.log(tokens, rewards)
         const currentquestion = questions.find(q => q.id === quesid);
 
-        if (!currentquestion) return res.status(404).json({ success: false, message: 'Question not found' });
-        if (Number(currentquestion.correct_answer) === Number(userans)) {
-            existing.points = tokens
+        existing.points = tokens
             existing.rewards = rewards
             const updated = await UserData.findByIdAndUpdate(
                 existing.id,
@@ -147,6 +145,9 @@ app.post('/checkans', authenticateToken, async (req, res) => {
             );
             console.log(updated)
             if (updated)
+
+        if (!currentquestion) return res.status(404).json({ success: false, message: 'Question not found' });
+        if (Number(currentquestion.correct_answer) === Number(userans)) {
                 return res.json({ success: true });
         }
         return res.json({ success: false });
