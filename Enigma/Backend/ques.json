@@ -4,14 +4,16 @@
     "question_no": 1,
     "question": "What is the capital of France?",
     "options": ["Berlin", "Madrid", "Paris", "Rome"],
-    "correct_answer": "Paris"
+    "correct_answer": 3,
+    "status": "pending"
   },
   {
     "id": "q2",
     "question_no": 2,
     "question": "Which language runs in a web browser?",
     "options": ["Java", "C", "Python", "JavaScript"],
-    "correct_answer": "JavaScript"
+    "correct_answer": 4,
+    "status": "pending"
   },
   {
     "id": "q3",
@@ -23,28 +25,32 @@
       "Computer Style Sheets",
       "Creative Style System"
     ],
-    "correct_answer": "Cascading Style Sheets"
+    "correct_answer": 2,
+    "status": "pending"
   },
   {
     "id": "q4",
     "question_no": 4,
     "question": "Which HTML tag is used to define an internal style sheet?",
     "options": ["<css>", "<script>", "<style>", "<link>"],
-    "correct_answer": "<style>"
+    "correct_answer": 3,
+    "status": "pending"
   },
   {
     "id": "q5",
     "question_no": 5,
     "question": "Which company developed the React library?",
     "options": ["Google", "Microsoft", "Facebook", "Amazon"],
-    "correct_answer": "Facebook"
+    "correct_answer": 3,
+    "status": "pending"
   },
   {
     "id": "q6",
     "question_no": 6,
     "question": "Which HTML attribute specifies an alternate text for an image?",
     "options": ["alt", "title", "src", "href"],
-    "correct_answer": "alt"
+    "correct_answer": 1,
+    "status": "pending"
   },
   {
     "id": "q7",
@@ -56,56 +62,64 @@
       "JavaScript Output Notation",
       "Java Serialized Object Notation"
     ],
-    "correct_answer": "JavaScript Object Notation"
+    "correct_answer": 2,
+    "status": "pending"
   },
   {
     "id": "q8",
     "question_no": 8,
     "question": "Which company developed TypeScript?",
     "options": ["Google", "Microsoft", "Facebook", "Apple"],
-    "correct_answer": "Microsoft"
+    "correct_answer": 2,
+    "status": "pending"
   },
   {
     "id": "q9",
     "question_no": 9,
     "question": "Which HTML element is used to define a list item?",
     "options": ["<ul>", "<li>", "<ol>", "<list>"],
-    "correct_answer": "<li>"
+    "correct_answer": 2,
+    "status": "pending"
   },
   {
     "id": "q10",
     "question_no": 10,
     "question": "Which of the following is a JavaScript framework?",
     "options": ["Laravel", "Django", "Vue.js", "Rails"],
-    "correct_answer": "Vue.js"
+    "correct_answer": 3,
+    "status": "pending"
   },
   {
     "id": "q11",
     "question_no": 11,
     "question": "Which of the following is used for version control?",
     "options": ["Git", "Node.js", "React", "Docker"],
-    "correct_answer": "Git"
+    "correct_answer": 1,
+    "status": "pending"
   },
   {
     "id": "q12",
     "question_no": 12,
     "question": "In JavaScript, which keyword is used to declare a constant variable?",
     "options": ["var", "let", "const", "static"],
-    "correct_answer": "const"
+    "correct_answer": 3,
+    "status": "pending"
   },
   {
     "id": "q13",
     "question_no": 13,
     "question": "Which method converts a JSON string into a JavaScript object?",
     "options": ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.object()"],
-    "correct_answer": "JSON.parse()"
+    "correct_answer": 1,
+    "status": "pending"
   },
   {
     "id": "q14",
     "question_no": 14,
     "question": "Which CSS property is used to change the text color?",
     "options": ["text-color", "color", "font-color", "font-style"],
-    "correct_answer": "color"
+    "correct_answer": 2,
+    "status": "pending"
   },
   {
     "id": "q15",
@@ -117,6 +131,7 @@
       "To compile Java code",
       "To style web pages"
     ],
-    "correct_answer": "To run JavaScript on the server"
+    "correct_answer": 2,
+    "status": "pending"
   }
 ]

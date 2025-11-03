@@ -1,13 +1,42 @@
-import { useState } from 'react'
-import Blocnum from './components/Blocnum'
-import './App.css'
+import React from 'react'
+import HomePage from './Pages/HomePage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoute from './Routes/PrivateRoute';
+import { AuthProvider } from './Context/AuthProvider';
+import Login from './Pages/Login';
+import AdminLogin from './Pages/AdminLogin';
+import AdminPage from './Pages/AdminPage';
 
 function App() {
-  
+
   return (
-    <div className='relative flex justify-center w-full h-[50vh] ' >
-        <Blocnum/>
-    </div>
+    <>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route
+              path='/'
+              element={
+                <PrivateRoute role="user">
+                  <HomePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/admin'
+              element={
+                <PrivateRoute role="admin">
+                  <AdminPage />
+                </PrivateRoute>
+              }
+            />
+
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </>
   )
 }
 

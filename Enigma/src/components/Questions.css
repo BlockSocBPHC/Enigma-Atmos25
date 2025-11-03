@@ -1,0 +1,7 @@
+.questions-container {
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+.questions-container::-webkit-scrollbar {
+  display: none; 
+}
