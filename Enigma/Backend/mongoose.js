@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, default: "" },
     firstName: {type: String, default: ""},
     started: {type: Boolean, default: false},
-    tokens: { type: Number, default: 100000 },
+    tokens: { type: Number, default: 5000 },
     rewards: { type: Number, default: 0 },
     points: {type: Number, default: 0},
     questions: { type: [Object], default: [] }, 

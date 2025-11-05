@@ -12,7 +12,7 @@ const NewContent = () => {
     const [convert, setConvert] = useState('')
     const [blocks, setBlocks] = useState([]);
     const [answerIndex, setAnswerIndex] = useState('');
-    const [tokens, setTokens] = useState(100000);
+    const [tokens, setTokens] = useState(5000);
     const [reward, setReward] = useState(0);
     const [tokenInput, setTokenInput] = useState('');
     const [miningTimeLeft, setMiningTimeLeft] = useState(0);
@@ -198,7 +198,7 @@ const NewContent = () => {
         if (el) el.scrollIntoView({ behavior: "auto", block: "nearest", inline: "center" });
     };
 
-    return (
+ return (
         <div className="flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6 p-6 bg-black text-gray-200">
             {/* Blockchain visualization */}
             <div className="lg:col-span-3 bg-gray-900 rounded-2xl overflow-auto p-6 border border-gray-700 h-[150px]">
@@ -221,20 +221,21 @@ const NewContent = () => {
                         <p className="text-sm text-gray-400 uppercase tracking-wider">Reward</p>
                         <p className="text-3xl font-extrabold text-yellow-400 drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]">{reward}</p>
                     </div>
-
+                </div>
+                <div className='flex justify-evenly gap items-center'>
                     {/* Convert Input */}
                     <div className="flex flex-col items-center justify-center px-2">
-                        <p className="text-sm text-gray-400 uppercase tracking-wider">Convert</p>
+                        <p className="text-sm text-gray-400 uppercase tracking-wider"></p>
                         <input
                             type="number"
                             min="1"
                             max={reward}
                             value={convert}
                             onChange={(e) => {let value= Number(e.target.value); if (value > reward) value = reward; setConvert(value)}}
-                        className="w-16 p-1 rounded-md bg-gray-800 text-center text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                        className="w-50 p-1 rounded-md bg-gray-800 text-center text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
                         />
                     </div>
-                </div>
+                
 
                 {/* Bottom button */}
                 <div className="flex justify-center mt-2">
@@ -245,6 +246,7 @@ const NewContent = () => {
                     >
                         Convert
                     </button>
+                </div>
                 </div>
             </div>
 
@@ -263,21 +265,27 @@ const NewContent = () => {
                                 ))}
                             </ul>
 
-                            <div className="mt-6 flex flex-row justify-center gap-10 items-center">
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max='4'
-                                    value={answerIndex}
-                                    onChange={(e) => setAnswerIndex(e.target.value)}
-                                    className="w-24 p-3 rounded bg-gray-800 text-center text-white border border-gray-600"
-                                    disabled={isMining}
-                                />
-                            </div>
+                        <div className="mt-6 flex flex-row justify-center gap-10 items-center">
+                            <input
+                                type="number"
+                                min="1"
+                                max="4"
+                                value={answerIndex}
+                                onChange={(e) => {
+                                    let value = Number(e.target.value);
+                                    if (value > 4) value = 4;          
+                                    if (value < 1) value = 1;          
+                                    setAnswerIndex(value.toString());  
+                                }}
+                                className="w-24 p-3 rounded bg-gray-800 text-center text-white border border-gray-600"
+                                disabled={isMining}
+                            />
+                        </div>
+
                         </div>
                     ))
                 ) : (
-                    <p><button onClick={fetchNewQuestion()}>Start</button></p>
+                    <p><button onClick={fetchNewQuestion}>Start</button></p>
                 )}
             </div>
 
