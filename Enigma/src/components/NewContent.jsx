@@ -267,7 +267,7 @@ const NewContent = () => {
                                 <input
                                     type="number"
                                     min="1"
-                                    max={question.options.length}
+                                    max='4'
                                     value={answerIndex}
                                     onChange={(e) => setAnswerIndex(e.target.value)}
                                     className="w-24 p-3 rounded bg-gray-800 text-center text-white border border-gray-600"
