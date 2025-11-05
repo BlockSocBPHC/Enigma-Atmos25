@@ -146,8 +146,8 @@ app.post('/checkans', authenticateToken, async (req, res) => {
                 updating.status = 'failed';
                 existing.markModified('questions');
                 await existing.save();
-                const quest = existing.questions
-                return res.json({ quest, tokens, reward })
+                const question = existing.questions
+                return res.json({ question, tokens, reward })
             }
         }
 
