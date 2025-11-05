@@ -82,7 +82,7 @@ app.post('/login', async (req, res) => {
             const token = jwt.sign(
                 { id: existing._id, email: existing.email, role: "user" },
                 SECRET,
-                { expiresIn: "1h" })
+                { expiresIn: "6h" })
             res.json(token)
         }   else {
                 const first = user.given_name.split(' ')[0]
@@ -95,7 +95,7 @@ app.post('/login', async (req, res) => {
                 const token = jwt.sign(
                     { id: created._id, email: created.email, role: "user" },
                     SECRET,
-                    { expiresIn: "1h" })
+                    { expiresIn: "6h" })
                 res.json(token)
         }
 

@@ -69,6 +69,7 @@ const NewContent = () => {
         }
     };
 
+    // fetch Question after reload
     const fetchQuestion = async () => {
         try {
             console.log('hi')
@@ -212,7 +213,7 @@ const NewContent = () => {
                         </div>
                     ))
                 ) : (
-                    <p>Loading questions...</p>
+                    <p><button onClick={fetchNewQuestion}>Start</button></p>
                 )}
             </div>
 
