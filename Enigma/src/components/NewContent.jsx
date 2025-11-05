@@ -9,7 +9,7 @@ const NewContent = () => {
     const { token } = useContext(AuthContext);
     const { start, setStart } = useContext(StartContext);
     const { currentQuestion, setCurrentQuestion } = useContext(CurrentQuestion);
-
+    const [convert, setConvert] = useState('')
     const [blocks, setBlocks] = useState([]);
     const [answerIndex, setAnswerIndex] = useState('');
     const [tokens, setTokens] = useState(100000);
@@ -17,6 +17,7 @@ const NewContent = () => {
     const [tokenInput, setTokenInput] = useState('');
     const [miningTimeLeft, setMiningTimeLeft] = useState(0);
     const [isMining, setIsMining] = useState(false);
+    const [disabledConversion, setDisabledConversion] = useState(true)
 
     const baseTokens = 10;
     const baseTimeSecondsForTenTokens = 60;
@@ -48,6 +49,15 @@ const NewContent = () => {
             console.error("Error fetching data:", err);
         }
     };
+
+    useEffect(() => {
+        if (reward <= 0 || !reward) {
+            setDisabledConversion(true)
+            console.log('jayesh')
+        }
+        else
+            setDisabledConversion(false)
+    }, [reward])
 
     // Get user tokens from server
     const getTokens = async () => {
@@ -86,6 +96,29 @@ const NewContent = () => {
                 setBlocks(data.question)
             }
         }
+        catch (err) {
+            console.log('err: ', err)
+        }
+    }
+
+    const conversion = async () => {
+        try {
+            const res = await fetch("http://localhost:4000/conversion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({ reward, tokens, convert })
+            });
+            const data = await res.json()
+            console.log('convert:', data)
+            if (data) {
+                setTokens(data.tokens)
+                setReward(data.reward)
+            }
+        }
+
         catch (err) {
             console.log('err: ', err)
         }
@@ -173,17 +206,48 @@ const NewContent = () => {
             </div>
 
             {/* Stats */}
-            <div className="lg:col-span-1 h-[150px] bg-gray-900 rounded-2xl p-6 border border-gray-700 flex flex-row justify-between items-center">
-                <div>
-                    <p className="text-lg text-gray-400">Tokens</p>
-                    <p className="text-5xl font-bold text-green-400">{tokens}</p>
+            <div className="lg:col-span-1 h-[150px] bg-gray-900 rounded-2xl p-4 border border-gray-700 flex flex-col justify-between shadow-lg">
+
+                {/* Top stats */}
+                <div className="flex justify-between items-center">
+                    {/* Tokens */}
+                    <div className="flex flex-col items-center justify-center px-2">
+                        <p className="text-sm text-gray-400 uppercase tracking-wider">Tokens</p>
+                        <p className="text-3xl font-extrabold text-green-400 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]">{tokens}</p>
+                    </div>
+
+                    {/* Reward */}
+                    <div className="flex flex-col items-center justify-center px-2">
+                        <p className="text-sm text-gray-400 uppercase tracking-wider">Reward</p>
+                        <p className="text-3xl font-extrabold text-yellow-400 drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]">{reward}</p>
+                    </div>
+
+                    {/* Convert Input */}
+                    <div className="flex flex-col items-center justify-center px-2">
+                        <p className="text-sm text-gray-400 uppercase tracking-wider">Convert</p>
+                        <input
+                            type="number"
+                            min="1"
+                            max={reward}
+                            value={convert}
+                            onChange={(e) => {let value= Number(e.target.value); if (value > reward) value = reward; setConvert(value)}}
+                        className="w-16 p-1 rounded-md bg-gray-800 text-center text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                        />
+                    </div>
                 </div>
-                <div>
-                    <p className="text-lg text-gray-400">Reward</p>
-                    <p className="text-5xl font-bold text-yellow-400">{reward}</p>
-                    <button onClick={fetchNewQuestion}>Start</button>
+
+                {/* Bottom button */}
+                <div className="flex justify-center mt-2">
+                    <button
+                        onClick={conversion}
+                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                        disabled={disabledConversion}
+                    >
+                        Convert
+                    </button>
                 </div>
             </div>
+
 
             {/* Question Section */}
             <div className="questions-container lg:col-span-3 bg-gray-900 rounded-2xl p-6 border border-gray-700 flex flex-row overflow-auto items-center">
@@ -213,7 +277,7 @@ const NewContent = () => {
                         </div>
                     ))
                 ) : (
-                    <p><button onClick={fetchNewQuestion}>Start</button></p>
+                    <p><button onClick={fetchNewQuestion()}>Start</button></p>
                 )}
             </div>
 

@@ -11,11 +11,9 @@ const PORT = 4000;
 
 dotenv.config();
 
-const startingQuestions = process.env.starting_Questions
-const attack_after_which_question = process.env.attack_after_which_question;
+const conversionFactor = process.env.consversion_factor 
 const SECRET = process.env.SECRET;
-const after = Number(process.env.attack_after_which_question);
-const before = Number(process.env.attack_before_which_question);
+
 
 app.use((req, res, next) => {
     res.removeHeader("Cross-Origin-Opener-Policy");
@@ -67,6 +65,35 @@ app.get('/currentquestion', authenticateToken, async (req, res) => {
             return res.json({ question: data.questions });
 
         res.status(404).json({ message: "User not found" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+app.post('/conversion', authenticateToken, async (req, res) => {
+    try {
+        const userid = req.user.id;
+        let { reward, tokens, convert } = req.body;
+
+        reward = Number(reward);
+        tokens = Number(tokens);
+        convert = Number(convert);
+
+        // Update values
+        tokens = tokens + convert * conversionFactor;
+        reward = reward - convert ;
+
+        // Find user and update
+        const data = await UserData.findById(userid);
+        if (!data) return res.status(404).json({ message: "User not found" });
+
+        data.tokens = tokens;
+        data.rewards = reward;
+
+        await data.save();
+
+        res.json({ tokens: data.tokens, reward: data.rewards });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server error" });
