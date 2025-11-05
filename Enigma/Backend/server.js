@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { UserData } from "./mongoose.js";
 import jwt from "jsonwebtoken";
 import { AdminData } from "./mongoose.js";
+import addRandomQuestion from "./utils/randomquestion.js";
 
 const app = express();
 const PORT = 4000;
@@ -21,30 +22,6 @@ app.use(express.json());
 
 const { default: questions } = await import('./ques.json', { with: { type: 'json' } });
 
-
-app.post('/getquestions', (req, res) => {
-    try {
-        const usedIds = req.body.usedIds || []; // expect { usedIds: [...] } from frontend
-        const total = questions.length;
-
-        if (usedIds.length >= total)
-            return res.json(null); // no more unique questions
-
-        let randomIndex, selectedQuestion;
-
-        do {
-            randomIndex = Math.floor(Math.random() * total);
-            selectedQuestion = questions[randomIndex];
-        } while (usedIds.includes(selectedQuestion.id));
-
-        res.json(selectedQuestion);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
-    }
-});
-
-
 // -------- JWT Middleware --------
 function authenticateToken(req, res, next) {
     const authHeader = req.headers["authorization"];
@@ -57,6 +34,23 @@ function authenticateToken(req, res, next) {
         next();
     });
 }
+
+
+app.get('/getquestions', authenticateToken, async (req, res) => {
+    try {
+        const userid = req.user.id
+        const data = await UserData.findById(userid);
+        const tokens = data.points
+        const rewards= data.rewards
+        const { question, attackIndex } = await addRandomQuestion(userid);
+        res.json({ question, tokens, rewards , attackIndex })
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+})
+
 app.post('/login', async (req, res) => {
     try {
         const { user } = req.body;
@@ -72,8 +66,6 @@ app.post('/login', async (req, res) => {
             const created = await UserData.create({
                 name: user.name,
                 email: user.email,
-                points: 1000,
-                rewards: 0,
             });
 
             const token = jwt.sign(
@@ -94,10 +86,8 @@ app.post('/admin/login', async (req, res) => {
     try {
         const { username, password } = req.body
         const existing = await AdminData.findOne({ name: username, password: password })
-        console.log(existing.name, existing.password)
         if (existing) {
             if (existing.password === password) {
-                console.log('successful')
                 const token = jwt.sign(
                     { id: existing._id, name: existing.name, role: "admin" },
                     SECRET,
@@ -125,32 +115,42 @@ app.get("/getranking", async (req, res) => {
 
 app.post('/checkans', authenticateToken, async (req, res) => {
     try {
-        const userid = req.user.id
-        const existing = await UserData.findById(userid)
-        const { userans, quesid, tokens, rewards } = req.body;
-        // console.log(tokens, rewards)
+        const userid = req.user.id;
+        const rewardPoints = 5;
+        let existing = await UserData.findById(userid);
+        let { userans, quesid, tokens, reward, tokenInput } = req.body;
+        
         const currentquestion = questions.find(q => q.id === quesid);
 
-        existing.points = tokens
-            existing.rewards = rewards
-            const updated = await UserData.findByIdAndUpdate(
-                existing.id,
-                {
-                    $set: {
-                        points: existing.points,
-                        rewards: existing.rewards,
-                    }
-                },
-                { new: true, runValidators: true }
-            );
-            console.log(updated)
-            if (updated)
+        if (!currentquestion)
+            return res.status(404).json({ success: false, message: "Question not found" });
 
-        if (!currentquestion) return res.status(404).json({ success: false, message: 'Question not found' });
         if (Number(currentquestion.correct_answer) === Number(userans)) {
-                return res.json({ success: true });
+            reward = Number(reward) + rewardPoints
+            tokens = Number(tokens) - Number(tokenInput)
+
+            const updating = existing.questions.find(q => q.id === quesid);
+            if (updating) {
+                updating.status = 'success';
+                existing.markModified('questions');
+                await existing.save()
+                const { question, attackIndex } = await addRandomQuestion(userid)
+                return res.json({question, tokens, reward, attackIndex})
+            }
         }
-        return res.json({ success: false });
+
+        else {
+            tokens = tokens - tokenInput
+            const updating = existing.questions.find(q => q.id === quesid);
+            if (updating) {
+                updating.status = 'failed';
+                existing.markModified('questions');
+                await existing.save();
+                const quest = existing.questions
+                return res.json({ quest, tokens, reward })
+            }
+        }
+
 
     } catch (err) {
         console.error(err);
@@ -159,8 +159,6 @@ app.post('/checkans', authenticateToken, async (req, res) => {
 })
 
 app.post('/attack', async (req, res) => {
-    console.log('running');
-
     let { blocks, usedIds } = req.body;
     const before = Number(process.env.attack_before_which_question);
     const after = Number(process.env.attack_after_which_question);

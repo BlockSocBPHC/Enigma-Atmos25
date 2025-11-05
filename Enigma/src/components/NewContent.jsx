@@ -4,8 +4,8 @@ import './Questions.css'
 import { CurrentQuestion } from '../Hooks/CurrentQuestion.js';
 import { AuthContext } from '../Context/AuthProvider.jsx';
 
-const MainContent = () => {
-    const {token}= useContext(AuthContext) 
+const NewContent = () => {
+    const { token } = useContext(AuthContext)
     const { currentQuestion, setCurrentQuestion } = useContext(CurrentQuestion)
     const [blocks, setBlocks] = useState([]);
     const [canfetch, setCanFetch] = useState(false)
@@ -15,7 +15,7 @@ const MainContent = () => {
     const [tokenInput, setTokenInput] = useState('');
     const [miningTimeLeft, setMiningTimeLeft] = useState(0);
     const [isMining, setIsMining] = useState(false);
-    const [usedIds, setUsedIds] = useState([])
+
 
     const baseTokens = 10;
     const baseTimeSecondsForTenTokens = 60;
@@ -29,92 +29,65 @@ const MainContent = () => {
 
     const fetchNewQuestion = async () => {
         try {
-            if (!canfetch) return console.log('cancelled');
             const res = await fetch("http://localhost:4000/getquestions", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" ,
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({ usedIds: Array.from(usedIds) }),
             });
             const data = await res.json();
-            if (data) 
-                setBlocks(data)
-            else 
-                console.log(`⚠️ Duplicate question ${data.id} skipped`);
-            
+            console.log(data)
+            if (data) {
+                setBlocks(data.question)
+                setTokens(data.tokens)
+                setReward(data.rewards)
+            }
+            if (data.attackIndex)
+                alert(`You have been attacked on block: ${data.attackIndex+1}`);
+
         } catch (err) {
             console.error("Error fetching data:", err);
         }
     };
 
-
-
-    const attack = async (e) => {
-        e.preventDefault();
-
-        const res = await fetch('http://localhost:4000/attack', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ blocks, usedIds }),
-        });
-
-        const data = await res.json();
-        setBlocks(data);
-    };
+    useEffect(() => {
+        fetchNewQuestion()
+    }, [])
 
     useEffect(() => {
-        if (!canfetch || blocks.length === 0) return;
-        const lastId = blocks[blocks.length - 1].id;
-        const timeout = setTimeout(() => scrollToQuestion(lastId), 500);
-        setCurrentQuestion(blocks[blocks.length - 1]);
-        return () => clearTimeout(timeout);
-    }, [blocks]);
-
-
-    useEffect(() => {
-        if (!canfetch) {
-            const next = blocks.find(b => b.status === "pending" || b.status === "failed");
-            if (next) {
-                setTimeout(() => scrollToQuestion(next.id), 1000);
-                setCurrentQuestion(next)
-            } else {
-                setCanFetch(true);
-                fetchNewQuestion();
+        for (const block of blocks) {
+            if (block.status==='pending') {
+                scrollToQuestion(block.id)
+                setCurrentQuestion(block)
             }
         }
-    }, [canfetch, blocks]);
-
-
+    }, [blocks])
+    
 
 
     const checkAnswer = async (ques) => {
         const res = await fetch('http://localhost:4000/checkans', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json',
+            headers: {
+                'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`
-             },
+            },
             body: JSON.stringify({
                 userans: answerIndex,
                 quesid: ques.id,
-                tokens: tokens,
-                rewards: reward,
+                tokens, reward, tokenInput
             }),
         });
-
         const data = await res.json();
-        setBlocks(prev =>
-            prev.map(q =>
-                q.id === ques.id ? { ...q, status: data.success ? 'success' : 'failed' } : q
-            )
-        );
-        if (data.success && canfetch) {
-            console.log('ho rha hai')
-            return 'true'
+        console.log(data)
+        if (data) {
+            setBlocks(data.question)
+            setReward(data.reward)
+            setTokens(data.tokens)
         }
-        else {
-            return 'false'
-        }
+        if (data.attackIndex)
+            alert(`You have been attacked on block: ${data.attackIndex+1}`);
     }
 
     const handleStartMining = async () => {
@@ -126,21 +99,10 @@ const MainContent = () => {
             setMiningTimeLeft(prev => {
                 if (prev <= 1) {
                     clearInterval(interval);
-
-                    (async () => {
-                        const correct = await checkAnswer(currentQuestion);
-                        console.log('Answer correct:', correct);
-
-                        if (correct==='true') {
-                            setReward(r => r + 5);
-                            await fetchNewQuestion();
-                        }
-
-                        setAnswerIndex('');
-                        setTokenInput('');
-                        setIsMining(false);
-                    })();
-
+                    checkAnswer(currentQuestion)
+                    setAnswerIndex('');
+                    setTokenInput('');
+                    setIsMining(false);
                     return 0;
                 }
                 return prev - 1;
@@ -180,15 +142,11 @@ const MainContent = () => {
                     <p className="text-lg text-gray-400 ">Reward</p>
                     <p className="text-5xl font-bold text-yellow-400">{reward}</p>
                     <button
-                        onClick={() => {
-                            setCanFetch(true);
-                            fetchNewQuestion();
-                        }}
+                        onClick={fetchNewQuestion}
                     >
                         Start
                     </button>
                 </div>
-                <button onClick={(e) => { attack(e, blocks); setCanFetch(false) }}>Attack</button>
             </div>
 
             {/* Question Section */}
@@ -216,12 +174,12 @@ const MainContent = () => {
                                     className="w-24 p-3 rounded bg-gray-800 text-center text-white border border-gray-600"
                                     disabled={isMining}
                                 />
-                                <button
-                                    onClick={(e) => checkAnswer(e, question)}
+                                {/* <button
+                                    onClick={(e) => checkAnswer(question)}
                                     className=" bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-xl text-white transition-all"
                                 >
                                     Check
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     ))
@@ -260,4 +218,4 @@ const MainContent = () => {
 };
 
 
-export default MainContent;
+export default NewContent;

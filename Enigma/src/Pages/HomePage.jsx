@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { QuestionsContext } from '../Hooks/QuestionsContext';
 import { UsedIdsContext } from '../Hooks/UsedIdsContext';
-import { CorrectQuestionIdContext } from '../Hooks/CorrectQuestionIdContext';
-import JayeshContent from '../components/JayshContent'
 import { CurrentQuestion } from '../Hooks/CurrentQuestion';
+import NewContent from '../components/NewContent';
 
 const HomePage = () => {
   const [questions, setQuestions] = useState([]);
@@ -17,7 +16,7 @@ const HomePage = () => {
       <CurrentQuestion.Provider value={{ currentQuestion, setCurrentQuestion }}>
         <div className="bg-white text-blue-900 flex flex-col min-h-screen">
           <Navbar />
-          <JayeshContent />
+          <NewContent />
         </div>
       </CurrentQuestion.Provider>
       </UsedIdsContext.Provider>

@@ -14,7 +14,7 @@ const Blocnum = ({ blocks }) => {
         <React.Fragment key={b.id}>
           <button
             onClick={() => {scrollToQuestion(b.id); setCurrentQuestion(b)}}
-            className={`w-16 h-16 rounded-full flex items-center justify-center text-white text-lg font-bold transition-all ${b.status === "success"
+            className={`w-16 h-16 flex items-center justify-center text-white text-lg font-bold transition-all ${b.status === "success"
                 ? "bg-green-600"
                 : b.status === "failed"
                   ? "bg-red-600"
@@ -29,7 +29,7 @@ const Blocnum = ({ blocks }) => {
 
           {i !== blocks.length - 1 && (
             <svg
-              className="w-8 h-8 text-gray-500 flex-shrink-0"
+              className="w-8 h-8 text-gray-500 flex-shrink-0 mt-4"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
