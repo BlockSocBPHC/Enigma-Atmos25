@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import HomePage from './Pages/HomePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from './Routes/PrivateRoute';
@@ -6,12 +6,13 @@ import { AuthProvider } from './Context/AuthProvider';
 import Login from './Pages/Login';
 import AdminLogin from './Pages/AdminLogin';
 import AdminPage from './Pages/AdminPage';
+import { StartContext } from './Hooks/StartContext';
 
 function App() {
-
+  const [start, setStart] = useState(false)
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <StartContext.Provider value={{ start, setStart }}>
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -32,12 +33,11 @@ function App() {
                 </PrivateRoute>
               }
             />
-
           </Routes>
         </AuthProvider>
-      </BrowserRouter>
-    </>
-  )
+      </StartContext.Provider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

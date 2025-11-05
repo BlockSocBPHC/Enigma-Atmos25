@@ -5,3 +5,23 @@
 .questions-container::-webkit-scrollbar {
   display: none; 
 }
+/* Applies to all scrollable elements */
+::-webkit-scrollbar {
+    width: 10px;           /* Width of vertical scrollbar */
+    height: 10px;          /* Height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;   /* Tailwind bg-gray-900 */
+    border-radius: 9999px; /* Rounded track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b82f6;   /* Tailwind blue-500 */
+    border-radius: 9999px; /* Rounded thumb */
+    border: 2px solid #1f2937; /* Padding around thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa;   /* Tailwind blue-400 on hover */
+}

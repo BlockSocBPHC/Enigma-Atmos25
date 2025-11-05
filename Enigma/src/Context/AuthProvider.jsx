@@ -1,57 +1,70 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { StartContext } from "../Hooks/StartContext";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate()
+  const {start, setStart}= useContext(StartContext)
+  const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
+  const [checking, setChecking] = useState(true); // <-- add this
 
-  // Decode JWT and extract payload
   useEffect(() => {
-    if (token) {
+    const verifyToken = () => {
+      if (!token) {
+        setUser(null);
+        setChecking(false);
+        return;
+      }
+
       try {
         const parts = token.split(".");
-        if (parts.length === 3) {
-          const payload = JSON.parse(atob(parts[1]));
-          setUser({
-            id: payload.id,
-            name: payload.name,
-            role: payload.role,
-          });
-          // use expiry from backend (payload.exp)
-          const expMs = payload.exp * 1000; // exp is seconds
-          const timeLeft = expMs - Date.now();
-
-          if (timeLeft <= 0) {
-            logout();
-            navigate("/login", { replace: true });
-            return;
-          }
-
-          const timer = setTimeout(() => {
-            logout();
-            navigate("/login", { replace: true });
-          }, timeLeft);
-
-          return () => clearTimeout(timer);
-
-        } else {
+        if (parts.length !== 3) {
           console.warn("Invalid JWT structure");
-          setUser(null);
+          logout();
+          setChecking(false);
+          return;
         }
+
+        const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+        const payload = JSON.parse(
+          decodeURIComponent(escape(window.atob(base64)))
+        );
+
+        const expMs = payload.exp * 1000;
+        if (Date.now() > expMs) {
+          logout();
+          navigate("/login", { replace: true });
+          return;
+        }
+
+        setUser({
+          id: payload.id,
+          name: payload.name,
+          role: payload.role,
+        });
+
+        // auto logout on expiry
+        const timeLeft = expMs - Date.now();
+        const timer = setTimeout(() => {
+          logout();
+          navigate("/login", { replace: true });
+        }, timeLeft);
+
+        return () => clearTimeout(timer);
       } catch (err) {
         console.error("Error decoding token:", err);
-        setUser(null);
+        logout();
+      } finally {
+        setChecking(false); // <-- stop loading
       }
-    } else {
-      setUser(null);
-    }
+    };
+
+    verifyToken();
   }, [token]);
 
-  // Save token from backend (string directly)
   const login = (newToken) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
@@ -59,9 +72,15 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("start");
+    setStart(false);
     setToken(null);
+    setUser(null);
     console.log("Logout successful");
   };
+
+  // prevent children from rendering until token is verified
+  if (checking) return null; // <-- add this line
 
   return (
     <AuthContext.Provider value={{ token, user, login, logout }}>

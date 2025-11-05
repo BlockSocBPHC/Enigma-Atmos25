@@ -17,8 +17,15 @@ const SECRET = process.env.SECRET;
 const after = Number(process.env.attack_after_which_question);
 const before = Number(process.env.attack_before_which_question);
 
+app.use((req, res, next) => {
+    res.removeHeader("Cross-Origin-Opener-Policy");
+    res.removeHeader("Cross-Origin-Embedder-Policy");
+    next();
+});
+
 app.use(cors());
 app.use(express.json());
+
 
 const { default: questions } = await import('./ques.json', { with: { type: 'json' } });
 
@@ -40,16 +47,32 @@ app.get('/getquestions', authenticateToken, async (req, res) => {
     try {
         const userid = req.user.id
         const data = await UserData.findById(userid);
-        const tokens = data.points
-        const rewards= data.rewards
+        const tokens = data.tokens
+        const rewards = data.rewards
         const { question, attackIndex } = await addRandomQuestion(userid);
-        res.json({ question, tokens, rewards , attackIndex })
+        res.json({ question, tokens, rewards, attackIndex })
 
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });
     }
 })
+
+app.get('/currentquestion', authenticateToken, async (req, res) => {
+    try {
+        const userid = req.user.id;
+        const data = await UserData.findById(userid);
+
+        if (data) 
+            return res.json({ question: data.questions });
+
+        res.status(404).json({ message: "User not found" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 
 app.post('/login', async (req, res) => {
     try {
@@ -61,18 +84,19 @@ app.post('/login', async (req, res) => {
                 SECRET,
                 { expiresIn: "1h" })
             res.json(token)
-        }
-        else {
-            const created = await UserData.create({
-                name: user.name,
-                email: user.email,
-            });
+        }   else {
+                const first = user.given_name.split(' ')[0]
+                const created = await UserData.create({
+                    name: user.name,
+                    email: user.email,
+                    firstName: first
+                });
 
-            const token = jwt.sign(
-                { id: created._id, email: created.email, role: "user" },
-                SECRET,
-                { expiresIn: "1h" })
-            res.json(token)
+                const token = jwt.sign(
+                    { id: created._id, email: created.email, role: "user" },
+                    SECRET,
+                    { expiresIn: "1h" })
+                res.json(token)
         }
 
     }
@@ -119,7 +143,7 @@ app.post('/checkans', authenticateToken, async (req, res) => {
         const rewardPoints = 5;
         let existing = await UserData.findById(userid);
         let { userans, quesid, tokens, reward, tokenInput } = req.body;
-        
+
         const currentquestion = questions.find(q => q.id === quesid);
 
         if (!currentquestion)
@@ -128,19 +152,22 @@ app.post('/checkans', authenticateToken, async (req, res) => {
         if (Number(currentquestion.correct_answer) === Number(userans)) {
             reward = Number(reward) + rewardPoints
             tokens = Number(tokens) - Number(tokenInput)
-
+            existing.tokens = tokens
+            existing.rewards = reward
             const updating = existing.questions.find(q => q.id === quesid);
             if (updating) {
                 updating.status = 'success';
                 existing.markModified('questions');
                 await existing.save()
                 const { question, attackIndex } = await addRandomQuestion(userid)
-                return res.json({question, tokens, reward, attackIndex})
+                return res.json({ question, tokens, reward, attackIndex })
             }
         }
 
         else {
             tokens = tokens - tokenInput
+            existing.tokens = tokens
+            existing.rewards = reward
             const updating = existing.questions.find(q => q.id === quesid);
             if (updating) {
                 updating.status = 'failed';
@@ -158,35 +185,29 @@ app.post('/checkans', authenticateToken, async (req, res) => {
     }
 })
 
-app.post('/attack', async (req, res) => {
-    let { blocks, usedIds } = req.body;
-    const before = Number(process.env.attack_before_which_question);
-    const after = Number(process.env.attack_after_which_question);
-    const factor = before - after;
-
-    const randomIndex1 = Math.floor(Math.random() * factor);
-    const total = questions.length;
-    let selectedQuestion;
-
-    do {
-        let randomIndex = Math.floor(Math.random() * total);
-        selectedQuestion = questions[randomIndex];
-    } while (usedIds.includes(selectedQuestion.id));
-
-    const newBlocks = blocks.map((n, i) =>
-        i === (randomIndex1 + after) ? selectedQuestion : n
-    );
-
-    for (let i = 0; i < blocks.length; i++) {
-        if (i > randomIndex1) {
-            if (blocks[i].status === 'success' || blocks[i].status === 'failed') {
-                blocks[i].status = 'pending';
-            }
-        }
+app.get('/gettokens', authenticateToken, async (req, res) => {
+    try {
+        const userid = req.user.id
+        const data = await UserData.findById(userid)
+        if (!data)
+            return res.status(404).json({ success: false, message: 'User not found' });
+        const tokens = data.tokens
+        const rewards = data.rewards
+        res.json({ tokens, rewards })
     }
-    res.json(newBlocks);
-});
+    catch (err) {
+        console.error('Error fetching tokens:', err.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
 
+app.get('/getuserdata', authenticateToken, async (req,res) => {
+    const userid = req.user.id
+    const user = await UserData.findById(userid)
+    if (user)
+        res.json({name: user.firstName})
+
+})
 
 
 app.listen(PORT, () => console.log(`✅ Backend running on http://localhost:${PORT}`));
