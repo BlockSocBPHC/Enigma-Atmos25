@@ -1,15 +1,54 @@
-✨ Greetings from BlockSoc! ✨
+# ✨ Enigma: The Blockchain Strategy Simulation ✨  
+### Presented by **BlockSoc**
 
-🧠 Ready to put your blockchain knowledge to the ultimate test?
-Welcome to Enigma: The Blockchain Strategy Simulation, an action-packed event where innovation meets competition!
+---
 
-⚔ In this immersive challenge, teams will build, secure, and govern their own digital networks while navigating real-world blockchain dilemmas:
+## 🧠 Overview
 
-🌐 Network forks & protocol upgrades
-🛡 Security breaches and attack scenarios
-🏛 Governance votes and consensus conflicts
+**Enigma** is an action-packed **blockchain strategy simulation** where innovation meets competition.  
+Teams will face real-world challenges inspired by blockchain governance, security, and scalability — testing their strategic thinking and understanding of decentralized systems.
 
-Every decision counts — your choices shape your chain’s future.
-Do you prioritize decentralization, scalability, or security? Will your governance survive a contentious fork? Only the best strategists will emerge as true ChainMasters!
+---
 
-💡 Sharpen your understanding of blockchain dynamics through interactive play, teamwork, and high-stakes decision-making.
+## ⚔ The Challenge
+
+In this immersive event, each team will:
+
+- 🌐 **Build and secure** their own digital networks  
+- 🛡 Handle **security breaches** and **attack scenarios**  
+- 🏛 Navigate **governance votes** and **consensus conflicts**  
+- 🔄 Manage **network forks** and **protocol upgrades**
+
+Every decision counts — your strategy shapes the destiny of your chain.  
+Will you prioritize **decentralization**, **scalability**, or **security**?  
+Can your governance survive a contentious fork?
+
+Only the best strategists will emerge as **true ChainMasters**!
+
+---
+
+## 💡 Learning Outcomes
+
+Through interactive play and collaboration, participants will:
+
+- Deepen their understanding of **blockchain dynamics**
+- Experience the **trade-offs** in blockchain design
+- Strengthen **teamwork** and **decision-making** skills under pressure
+
+---
+
+## 🏆 Organized by
+
+**BlockSoc** — the Blockchain Society of BITS Pilani, Hyderabad Campus.  
+Empowering students through blockchain education, innovation, and community.
+
+---
+
+## 📫 Contact
+
+For queries or collaboration, reach out to us:  
+📧 **blocksoc@hyderabad.bits-pilani.ac.in**
+
+---
+
+### 🧩 “Your chain, your choices, your legacy.”  
