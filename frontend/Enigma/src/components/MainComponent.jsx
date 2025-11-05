@@ -8,6 +8,8 @@ const MainContent = () => {
   const [tokens, setTokens] = useState(1000);
   const [reward, setReward] = useState(0);
   const [tokenInput, setTokenInput] = useState('');
+  const [convertAmount, setConvertAmount] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   const [miningTimeLeft, setMiningTimeLeft] = useState(0);
   const [isMining, setIsMining] = useState(false);
@@ -46,66 +48,73 @@ const MainContent = () => {
     return answer.trim() === currentQuestion.correct_answer;
   };
 
- const handleStartMining = () => {
-  if (!currentQuestion || !answer.trim()) return;
-  if (!Number.isFinite(numericTokenInput) || isBelowBase || !hasEnoughTokens) return;
+  const handleStartMining = () => {
+    if (!currentQuestion || !answer.trim()) return;
+    if (!Number.isFinite(numericTokenInput) || isBelowBase || !hasEnoughTokens) return;
 
-  setTokens(prev => prev - numericTokenInput);
-  setIsMining(true);
-  setMiningTimeLeft(miningSeconds);
+    setTokens(prev => prev - numericTokenInput);
+    setIsMining(true);
+    setMiningTimeLeft(miningSeconds);
 
-  // Check if a block for this question already exists
-  const existingBlock = blocks.find(b => b.questionId === currentQuestion.id);
+    const existingBlock = blocks.find(b => b.questionId === currentQuestion.id);
+    let blockId;
+    if (existingBlock) {
+      blockId = existingBlock.id;
+      setBlocks(prev =>
+        prev.map(b =>
+          b.id === blockId ? { ...b, status: 'pending' } : b
+        )
+      );
+    } else {
+      blockId = blocks.length + 1;
+      const newBlock = {
+        id: blockId,
+        status: 'pending',
+        answer: currentQuestion.correct_answer,
+        timestamp: new Date().toLocaleTimeString(),
+        questionId: currentQuestion.id,
+      };
+      setBlocks(prev => [...prev, newBlock]);
+    }
 
-  let blockId;
-  if (existingBlock) {
-    blockId = existingBlock.id;
-    // Reset status to pending for retry
-    setBlocks(prevBlocks =>
-      prevBlocks.map(b => 
-        b.id === blockId ? { ...b, status: 'pending' } : b
-      )
-    );
-  } else {
-    blockId = blocks.length + 1;
-    const newBlock = {
-      id: blockId,
-      status: 'pending',
-      answer: currentQuestion.correct_answer,
-      timestamp: new Date().toLocaleTimeString(),
-      questionId: currentQuestion.id,
-    };
-    setBlocks(prev => [...prev, newBlock]);
-  }
+    const interval = setInterval(() => {
+      setMiningTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          const correct = checkAnswer();
 
-  const interval = setInterval(() => {
-    setMiningTimeLeft(prev => {
-      if (prev <= 1) {
-        clearInterval(interval);
-        const correct = checkAnswer();
+          setBlocks(prevBlocks =>
+            prevBlocks.map(b =>
+              b.id === blockId ? { ...b, status: correct ? 'success' : 'failed' } : b
+            )
+          );
 
-        // Update block status
-        setBlocks(prevBlocks =>
-          prevBlocks.map(b =>
-            b.id === blockId ? { ...b, status: correct ? 'success' : 'failed' } : b
-          )
-        );
+          if (correct) {
+            setReward(prev => prev + 5);
+            fetchNewQuestion();
+          }
 
-        if (correct) {
-          setReward(prev => prev + 5);
-          fetchNewQuestion(); // fetch next question only if correct
+          setAnswer('');
+          setTokenInput('');
+          setIsMining(false);
+          return 0;
         }
+        return prev - 1;
+      });
+    }, 1000);
+  };
 
-        setAnswer('');
-        setTokenInput('');
-        setIsMining(false);
-        return 0;
-      }
-      return prev - 1;
-    });
-  }, 1000);
-};
-
+  const handleConvertRewards = () => {
+    const amount = Number(convertAmount);
+    if (Number.isNaN(amount) || amount <= 0 || amount > reward) {
+      setErrorMessage(`Please enter a valid number between 1 and ${reward}`);
+      return;
+    }
+    setTokens(prev => prev + amount);
+    setReward(prev => prev - amount);
+    setConvertAmount('');
+    setErrorMessage('');
+  };
 
   return (
     <div className="flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6 p-4 sm:p-8 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-300">
@@ -121,6 +130,30 @@ const MainContent = () => {
         <p className="text-6xl font-extrabold text-green-400">{tokens}</p>
         <h3 className="text-lg font-semibold text-gray-400 mt-6 mb-2">Total Reward</h3>
         <p className="text-6xl font-extrabold text-yellow-400">{reward}</p>
+
+        {/* Reward conversion */}
+        <div className="mt-6">
+          <label className="block text-sm text-gray-400 mb-1">Convert Rewards to Tokens </label>
+          <input
+            type="number"
+            min="1"
+            max={reward}
+            value={convertAmount}
+            onChange={e => setConvertAmount(e.target.value)}
+            className="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white"
+            disabled={reward === 0}
+          />
+          {errorMessage && (
+            <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
+          )}
+          <button
+            onClick={handleConvertRewards}
+            disabled={reward === 0 || convertAmount === ''}
+            className="mt-3 w-full rounded-lg bg-gradient-to-r from-green-600 to-teal-500 px-4 py-3 text-white font-bold hover:from-green-500 hover:to-teal-400 disabled:opacity-50 transition"
+          >
+            Convert
+          </button>
+        </div>
       </div>
 
       {/* Question area */}
@@ -162,7 +195,6 @@ const MainContent = () => {
           <input
             type="number"
             min={baseTokens}
-            placeholder="" // removed default 0
             value={tokenInput}
             onChange={e => setTokenInput(e.target.value)}
             className="mt-1 w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white"
