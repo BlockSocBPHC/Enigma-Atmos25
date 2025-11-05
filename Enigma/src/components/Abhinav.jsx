@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
-import { AuthContext } from '../Context/AuthProvider'
+import React, { useContext, useEffect, useState, useRef } from 'react';
+import { AuthContext } from '../Context/AuthProvider';
 
 const Navbar = () => {
-
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState('');
   const [showRules, setShowRules] = useState(false);
-  const { token } = useContext(AuthContext)
+  const { token } = useContext(AuthContext);
   const popupRef = useRef(null);
 
   const getuserdata = async () => {
@@ -15,19 +14,14 @@ const Navbar = () => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       }
-    })
-
-    const data = await res.json()
-    console.log('data: ', data)
-    if (data) {
-      setUsername(data.name)
-    }
+    });
+    const data = await res.json();
+    if (data) setUsername(data.name);
   };
 
   useEffect(() => {
-    getuserdata()
-  }, [])
-
+    getuserdata();
+  }, []);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -39,7 +33,7 @@ const Navbar = () => {
   }, []);
 
   return (
-   <div className="sticky top-0 z-50 flex items-center justify-between px-8 md:px-10 py-4 md:py-5 bg-gray-900 border-b border-gray-700 shadow-md relative">
+    <div className="sticky top-0 z-50 flex items-center justify-between px-8 md:px-10 py-4 md:py-5 bg-gray-900 border-b border-gray-700 shadow-md relative">
       <div className="font-bold text-2xl text-white flex items-center">
         <img
           src="public/Blocksoc logo.jpeg"
@@ -80,8 +74,7 @@ const Navbar = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
-
+export default Navbar;
