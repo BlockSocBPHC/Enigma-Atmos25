@@ -277,7 +277,7 @@ const NewContent = () => {
                         </div>
                     ))
                 ) : (
-                    <p><button onClick={fetchNewQuestion()}>Start</button></p>
+                    <p><button onClick={fetchNewQuestion}>Start</button></p>
                 )}
             </div>
 
