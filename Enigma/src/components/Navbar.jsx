@@ -42,7 +42,7 @@ const Navbar = () => {
    <div className="sticky top-0 z-50 flex items-center justify-between px-8 md:px-10 py-4 md:py-5 bg-gray-900 border-b border-gray-700 shadow-md relative">
       <div className="font-bold text-2xl text-white flex items-center">
         <img
-          src="public/Blocksoc logo.jpeg"
+          src="/Blocksoc logo.jpeg"
           alt="Blocksoc Logo"
           className="h-12 w-auto"
         />

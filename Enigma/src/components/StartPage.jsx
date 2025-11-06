@@ -1,5 +1,5 @@
 import React from "react";
-import BlockSocLogo from "public/Blocksoc logo.jpeg";
+import BlockSocLogo from "/Blocksoc logo.jpeg";
 
 const StartPage = ({ onStart }) => {
   return (

@@ -1,5 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-const MONGO_URI = "mongodb://127.0.0.1:27017/Enigma";
+import dotenv from 'dotenv'
+dotenv.config({ path: "../.env" });
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI);
 
@@ -8,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, default: "" },
     firstName: {type: String, default: ""},
     started: {type: Boolean, default: false},
-    tokens: { type: Number, default: 5000 },
+    tokens: { type: Number, default: 10000 },
     rewards: { type: Number, default: 0 },
     points: {type: Number, default: 0},
     questions: { type: [Object], default: [] }, 

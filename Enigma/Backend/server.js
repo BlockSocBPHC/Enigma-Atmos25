@@ -47,6 +47,12 @@ app.get('/getquestions', authenticateToken, async (req, res) => {
         const data = await UserData.findById(userid);
         const tokens = data.tokens
         const rewards = data.rewards
+        
+
+        
+
+        
+    
         const { question, attackIndex } = await addRandomQuestion(userid);
         res.json({ question, tokens, rewards, attackIndex })
 
@@ -88,8 +94,12 @@ app.post('/conversion', authenticateToken, async (req, res) => {
         const data = await UserData.findById(userid);
         if (!data) return res.status(404).json({ message: "User not found" });
 
+        let points = Number(data.points);
+        points = tokens + reward * 15
+
         data.tokens = tokens;
         data.rewards = reward;
+        data.points = points
 
         await data.save();
 
@@ -169,6 +179,8 @@ app.post('/checkans', authenticateToken, async (req, res) => {
         const userid = req.user.id;
         const rewardPoints = 5;
         let existing = await UserData.findById(userid);
+        let points = Number(existing.points);
+        
         let { userans, quesid, tokens, reward, tokenInput } = req.body;
 
         const currentquestion = questions.find(q => q.id === quesid);
@@ -179,8 +191,10 @@ app.post('/checkans', authenticateToken, async (req, res) => {
         if (Number(currentquestion.correct_answer) === Number(userans)) {
             reward = Number(reward) + rewardPoints
             tokens = Number(tokens) - Number(tokenInput)
+            points = tokens + reward * 15
             existing.tokens = tokens
             existing.rewards = reward
+            existing.points = points
             const updating = existing.questions.find(q => q.id === quesid);
             if (updating) {
                 updating.status = 'success';
@@ -193,8 +207,11 @@ app.post('/checkans', authenticateToken, async (req, res) => {
 
         else {
             tokens = tokens - tokenInput
+            points = tokens + reward * 15
             existing.tokens = tokens
             existing.rewards = reward
+            existing.points = points
+
             const updating = existing.questions.find(q => q.id === quesid);
             if (updating) {
                 updating.status = 'failed';
