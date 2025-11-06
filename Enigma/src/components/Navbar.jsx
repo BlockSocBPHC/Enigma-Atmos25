@@ -55,7 +55,8 @@ const Navbar = () => {
       <div className="flex items-center gap-4 relative">
         <div className="relative" ref={popupRef}>
           <button
-            onClick={() => setShowRules(!showRules)}
+            onMouseEnter={() => setShowRules(true)}
+            onMouseLeave={() => setShowRules(false)}
             className="bg-gray-700 hover:bg-gray-600 text-white border border-gray-500 rounded-full w-8 h-8 flex items-center justify-center font-bold transition-colors cursor-pointer"
           >
             i
