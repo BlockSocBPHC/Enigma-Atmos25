@@ -198,7 +198,7 @@ const NewContent = () => {
         if (el) el.scrollIntoView({ behavior: "auto", block: "nearest", inline: "center" });
     };
 
- return (
+    return (
         <div className="flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6 p-6 bg-black text-gray-200">
             {/* Blockchain visualization */}
             <div className="lg:col-span-3 bg-gray-900 rounded-2xl overflow-auto p-6 border border-gray-700 h-[150px]">
@@ -231,22 +231,22 @@ const NewContent = () => {
                             min="1"
                             max={reward}
                             value={convert}
-                            onChange={(e) => {let value= Number(e.target.value); if (value > reward) value = reward; setConvert(value)}}
-                        className="w-50 p-1 rounded-md bg-gray-800 text-center text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                            onChange={(e) => { let value = Number(e.target.value); if (value > reward) value = reward; setConvert(value) }}
+                            className="w-50 p-1 rounded-md bg-gray-800 text-center text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
                         />
                     </div>
-                
 
-                {/* Bottom button */}
-                <div className="flex justify-center mt-2">
-                    <button
-                        onClick={conversion}
-                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-                        disabled={disabledConversion}
-                    >
-                        Convert
-                    </button>
-                </div>
+
+                    {/* Bottom button */}
+                    <div className="flex justify-center mt-2">
+                        <button
+                            onClick={conversion}
+                            className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                            disabled={disabledConversion}
+                        >
+                            Convert
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -265,22 +265,18 @@ const NewContent = () => {
                                 ))}
                             </ul>
 
-                        <div className="mt-6 flex flex-row justify-center gap-10 items-center">
-                            <input
-                                type="number"
-                                min="1"
-                                max="4"
-                                value={answerIndex}
-                                onChange={(e) => {
-                                    let value = Number(e.target.value);
-                                    if (value > 4) value = 4;          
-                                    if (value < 1) value = 1;          
-                                    setAnswerIndex(value.toString());  
-                                }}
-                                className="w-24 p-3 rounded bg-gray-800 text-center text-white border border-gray-600"
-                                disabled={isMining}
-                            />
-                        </div>
+                            <div className="mt-6 flex flex-row justify-center gap-10 items-center">
+                                <input
+                                    type="number"
+                                    min="1"
+                                    max="4"
+                                    value={answerIndex}
+                                    onChange={(e) => setAnswerIndex(e.target.value)}
+                                    className="w-24 p-3 rounded bg-gray-800 text-center text-white border border-gray-600"
+                                    disabled={isMining}
+                                />
+
+                            </div>
 
                         </div>
                     ))

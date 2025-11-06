@@ -1,7 +1,8 @@
 import { UserData } from '../mongoose.js';
 import dotenv from "dotenv";
+import path from 'path';
 
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: path.resolve("../.env") });
 
 const after = Number(process.env.attack_after_which_question);
 const before = Number(process.env.attack_before_which_question);

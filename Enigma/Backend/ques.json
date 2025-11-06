@@ -2,28 +2,38 @@
   {
     "id": "q1",
     "question_no": 1,
-    "question": "What is the capital of France?",
-    "options": ["Berlin", "Madrid", "Paris", "Rome"],
-    "correct_answer": 3,
+    "question": "Which of the following cities is located on two continents?",
+    "options": [
+      "Istanbul",
+      "Moscow",
+      "Cairo",
+      "Athens"
+    ],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q2",
     "question_no": 2,
-    "question": "Which language runs in a web browser?",
-    "options": ["Java", "C", "Python", "JavaScript"],
-    "correct_answer": 4,
+    "question": "Who was the first Mughal Emperor of India?",
+    "options": [
+      "Akbar",
+      "Humayun",
+      "Babur",
+      "Aurangzeb"
+    ],
+    "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q3",
     "question_no": 3,
-    "question": "What does CSS stand for?",
+    "question": "What will be the output of: print(2**3**2) in Python?",
     "options": [
-      "Central Style Sheets",
-      "Cascading Style Sheets",
-      "Computer Style Sheets",
-      "Creative Style System"
+      "64",
+      "512",
+      "256",
+      "16"
     ],
     "correct_answer": 2,
     "status": "pending"
@@ -31,36 +41,51 @@
   {
     "id": "q4",
     "question_no": 4,
-    "question": "Which HTML tag is used to define an internal style sheet?",
-    "options": ["<css>", "<script>", "<style>", "<link>"],
+    "question": "If A = 1, B = 2, ..., Z = 26, then what is the sum of the letters in 'CAT'?",
+    "options": [
+      "24",
+      "26",
+      "27",
+      "29"
+    ],
     "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q5",
     "question_no": 5,
-    "question": "Which company developed the React library?",
-    "options": ["Google", "Microsoft", "Facebook", "Amazon"],
-    "correct_answer": 3,
+    "question": "Which planet rotates from east to west unlike most others?",
+    "options": [
+      "Venus",
+      "Jupiter",
+      "Saturn",
+      "Mars"
+    ],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q6",
     "question_no": 6,
-    "question": "Which HTML attribute specifies an alternate text for an image?",
-    "options": ["alt", "title", "src", "href"],
-    "correct_answer": 1,
+    "question": "If 5 cats catch 5 rats in 5 minutes, how long will 1 cat take to catch 1 rat?",
+    "options": [
+      "1 minute",
+      "5 minutes",
+      "25 minutes",
+      "Cannot be determined"
+    ],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q7",
     "question_no": 7,
-    "question": "What does JSON stand for?",
+    "question": "Which data structure works on the principle of Last In, First Out?",
     "options": [
-      "Java Standard Output Notation",
-      "JavaScript Object Notation",
-      "JavaScript Output Notation",
-      "Java Serialized Object Notation"
+      "Queue",
+      "Stack",
+      "Linked List",
+      "Tree"
     ],
     "correct_answer": 2,
     "status": "pending"
@@ -68,68 +93,324 @@
   {
     "id": "q8",
     "question_no": 8,
-    "question": "Which company developed TypeScript?",
-    "options": ["Google", "Microsoft", "Facebook", "Apple"],
-    "correct_answer": 2,
+    "question": "In a code, if CAT = DBU, what is DOG in the same code?",
+    "options": [
+      "EPH",
+      "EOG",
+      "ENH",
+      "DPH"
+    ],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q9",
     "question_no": 9,
-    "question": "Which HTML element is used to define a list item?",
-    "options": ["<ul>", "<li>", "<ol>", "<list>"],
-    "correct_answer": 2,
+    "question": "Which historical event happened first?",
+    "options": [
+      "American Revolution",
+      "French Revolution",
+      "World War I",
+      "Russian Revolution"
+    ],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q10",
     "question_no": 10,
-    "question": "Which of the following is a JavaScript framework?",
-    "options": ["Laravel", "Django", "Vue.js", "Rails"],
-    "correct_answer": 3,
+    "question": "A clock shows 3:15. What is the angle between the hour and minute hands?",
+    "options": [
+      "7.5°",
+      "15°",
+      "30°",
+      "37.5°"
+    ],
+    "correct_answer": 4,
     "status": "pending"
   },
   {
     "id": "q11",
     "question_no": 11,
-    "question": "Which of the following is used for version control?",
-    "options": ["Git", "Node.js", "React", "Docker"],
-    "correct_answer": 1,
+    "question": "Which river flows through the Grand Canyon?",
+    "options": [
+      "Mississippi",
+      "Colorado",
+      "Amazon",
+      "Rio Grande"
+    ],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q12",
     "question_no": 12,
-    "question": "In JavaScript, which keyword is used to declare a constant variable?",
-    "options": ["var", "let", "const", "static"],
-    "correct_answer": 3,
+    "question": "Who invented the printing press?",
+    "options": [
+      "Isaac Newton",
+      "Johannes Gutenberg",
+      "Galileo Galilei",
+      "Leonardo da Vinci"
+    ],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q13",
     "question_no": 13,
-    "question": "Which method converts a JSON string into a JavaScript object?",
-    "options": ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.object()"],
+    "question": "What will be the output of: print(10//3)?",
+    "options": [
+      "3",
+      "3.3",
+      "4",
+      "Error"
+    ],
     "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q14",
     "question_no": 14,
-    "question": "Which CSS property is used to change the text color?",
-    "options": ["text-color", "color", "font-color", "font-style"],
-    "correct_answer": 2,
+    "question": "If 3x + 2 = 11, what is x?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q15",
     "question_no": 15,
-    "question": "What is the purpose of the Node.js runtime?",
+    "question": "Which continent has no permanent human population?",
     "options": [
-      "To run JavaScript in the browser",
-      "To run JavaScript on the server",
-      "To compile Java code",
-      "To style web pages"
+      "Antarctica",
+      "Australia",
+      "Asia",
+      "Europe"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q16",
+    "question_no": 16,
+    "question": "In a code, FLOWER is written as GMQXFS. How is GARDEN written?",
+    "options": [
+      "HBSFBO",
+      "HBSFEP",
+      "HBSFEN",
+      "HASFEP"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q17",
+    "question_no": 17,
+    "question": "Which of the following languages is compiled and interpreted?",
+    "options": [
+      "C",
+      "Python",
+      "Java",
+      "C++"
+    ],
+    "correct_answer": 3,
+    "status": "pending"
+  },
+  {
+    "id": "q18",
+    "question_no": 18,
+    "question": "The Battle of Plassey was fought in which year?",
+    "options": [
+      "1757",
+      "1764",
+      "1857",
+      "1707"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q19",
+    "question_no": 19,
+    "question": "If MONDAY = 65, then what is FRIDAY?",
+    "options": [
+      "63",
+      "70",
+      "71",
+      "68"
+    ],
+    "correct_answer": 4,
+    "status": "pending"
+  },
+  {
+    "id": "q20",
+    "question_no": 20,
+    "question": "Which layer of the Earth contains the tectonic plates?",
+    "options": [
+      "Core",
+      "Mantle",
+      "Crust",
+      "Inner Core"
+    ],
+    "correct_answer": 3,
+    "status": "pending"
+  },
+  {
+    "id": "q21",
+    "question_no": 21,
+    "question": "Which function in Python converts a string to lowercase?",
+    "options": [
+      "lower()",
+      "tolower()",
+      "toLowerCase()",
+      "smallcase()"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q22",
+    "question_no": 22,
+    "question": "Which of these Indian rulers built the Red Fort in Delhi?",
+    "options": [
+      "Akbar",
+      "Shah Jahan",
+      "Humayun",
+      "Aurangzeb"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q23",
+    "question_no": 23,
+    "question": "If 12 men can build a wall in 6 days, how many days will 6 men take?",
+    "options": [
+      "3",
+      "6",
+      "9",
+      "12"
+    ],
+    "correct_answer": 4,
+    "status": "pending"
+  },
+  {
+    "id": "q24",
+    "question_no": 24,
+    "question": "Which ocean is the largest on Earth?",
+    "options": [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Arctic Ocean",
+      "Pacific Ocean"
+    ],
+    "correct_answer": 4,
+    "status": "pending"
+  },
+  {
+    "id": "q25",
+    "question_no": 25,
+    "question": "Which keyword is used to define a function in Python?",
+    "options": [
+      "func",
+      "function",
+      "def",
+      "lambda"
+    ],
+    "correct_answer": 3,
+    "status": "pending"
+  },
+  {
+    "id": "q26",
+    "question_no": 26,
+    "question": "If in a code, TREE = USFF, then PLANT = ?",
+    "options": [
+      "QMBOV",
+      "QMBNU",
+      "QMBNT",
+      "QMBMU"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q27",
+    "question_no": 27,
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": [
+      "China",
+      "Japan",
+      "South Korea",
+      "Thailand"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q28",
+    "question_no": 28,
+    "question": "In which year did World War II begin?",
+    "options": [
+      "1937",
+      "1939",
+      "1941",
+      "1945"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q29",
+    "question_no": 29,
+    "question": "Which of the following is NOT a programming paradigm?",
+    "options": [
+      "Object-Oriented",
+      "Functional",
+      "Structural",
+      "Chemical"
+    ],
+    "correct_answer": 4,
+    "status": "pending"
+  },
+  {
+    "id": "q30",
+    "question_no": 30,
+    "question": "If 9 + 3 = 93 and 8 + 4 = 84, then 7 + 5 = ?",
+    "options": [
+      "57",
+      "75",
+      "70",
+      "60"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q31",
+    "question_no": 31,
+    "question": "Who discovered penicillin?",
+    "options": [
+      "Alexander Fleming",
+      "Louis Pasteur",
+      "Marie Curie",
+      "Isaac Newton"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q32",
+    "question_no": 32,
+    "question": "Which planet is known as the Morning Star?",
+    "options": [
+      "Mercury",
+      "Venus",
+      "Mars",
+      "Neptune"
     ],
     "correct_answer": 2,
     "status": "pending"

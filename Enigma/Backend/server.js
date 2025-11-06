@@ -47,12 +47,7 @@ app.get('/getquestions', authenticateToken, async (req, res) => {
         const data = await UserData.findById(userid);
         const tokens = data.tokens
         const rewards = data.rewards
-        
 
-        
-
-        
-    
         const { question, attackIndex } = await addRandomQuestion(userid);
         res.json({ question, tokens, rewards, attackIndex })
 
