@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import AdminLogin from './Pages/AdminLogin';
 import AdminPage from './Pages/AdminPage';
 import { StartContext } from './Hooks/StartContext';
+import EndPage from './components/EndPage';
 
 function App() {
   const [start, setStart] = useState(false)
@@ -30,6 +31,14 @@ function App() {
               element={
                 <PrivateRoute role="admin">
                   <AdminPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/results'
+              element={
+                <PrivateRoute role="user">
+                  <EndPage />
                 </PrivateRoute>
               }
             />
