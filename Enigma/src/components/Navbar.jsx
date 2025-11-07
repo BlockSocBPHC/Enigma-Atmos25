@@ -9,7 +9,7 @@ const Navbar = () => {
   const popupRef = useRef(null);
 
   const getuserdata = async () => {
-    const res = await fetch("http://localhost:4000/getuserdata", {
+    const res = await fetch("/getuserdata", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
