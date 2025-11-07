@@ -414,8 +414,7 @@
     ],
     "correct_answer": 2,
     "status": "pending"
-  }
-  [
+  },
   {
     "id": "q33",
     "question_no": 33,
@@ -494,6 +493,4 @@
     "correct_answer": 1,
     "status": "pending"
   }
-]
-
 ]

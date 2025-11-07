@@ -20,7 +20,7 @@ const NewContent = () => {
     const [disabledConversion, setDisabledConversion] = useState(true)
 
     const baseTokens = 10;
-    const baseTimeSecondsForTenTokens = 60;
+    const baseTimeSecondsForTenTokens = 180;
 
     const numericTokenInput = tokenInput === '' ? NaN : Number(tokenInput);
     const safeTokens = Number.isFinite(numericTokenInput) ? Math.max(baseTokens, numericTokenInput) : baseTokens;
@@ -165,6 +165,9 @@ const NewContent = () => {
         const data = await res.json();
         if (data) {
             setBlocks(data.question);
+            const lastIndex = 25; // check up to question 10
+            if (blocks.length >= 20 && blocks.slice(0, lastIndex + 1).every(q => q.status === 'success'))
+                navigate('/results')
             setReward(data.reward);
             setTokens(data.tokens);
         }
