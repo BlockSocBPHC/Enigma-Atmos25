@@ -30,7 +30,7 @@ const NewContent = () => {
     // Fetch questions from server
     const fetchNewQuestion = async () => {
         try {
-            const res = await fetch("http://localhost:4000/getquestions", {
+            const res = await fetch("/getquestions", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const NewContent = () => {
     // Get user tokens from server
     const getTokens = async () => {
         try {
-            const res = await fetch("http://localhost:4000/gettokens", {
+            const res = await fetch("/gettokens", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const NewContent = () => {
     const fetchQuestion = async () => {
         try {
             console.log('hi')
-            const res = await fetch('http://localhost:4000/currentquestion', {
+            const res = await fetch('/currentquestion', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const NewContent = () => {
 
     const conversion = async () => {
         try {
-            const res = await fetch("http://localhost:4000/conversion", {
+            const res = await fetch("/conversion", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const NewContent = () => {
 
     // Check answer
     const checkAnswer = async (ques) => {
-        const res = await fetch('http://localhost:4000/checkans', {
+        const res = await fetch('/checkans', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
