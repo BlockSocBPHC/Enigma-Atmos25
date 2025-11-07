@@ -2,494 +2,400 @@
   {
     "id": "q1",
     "question_no": 1,
-    "question": "Which of the following cities is located on two continents?",
-    "options": [
-      "Istanbul",
-      "Moscow",
-      "Cairo",
-      "Athens"
-    ],
-    "correct_answer": 1,
+    "question": "What is the primary purpose of a blockchain?",
+    "options": ["Data storage", "Decentralized record-keeping", "Cloud computing", "AI model training"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q2",
     "question_no": 2,
-    "question": "Who was the first Mughal Emperor of India?",
-    "options": [
-      "Akbar",
-      "Humayun",
-      "Babur",
-      "Aurangzeb"
-    ],
+    "question": "Which cryptocurrency was the first to use blockchain technology?",
+    "options": ["Ethereum", "Litecoin", "Bitcoin", "Ripple"],
     "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q3",
     "question_no": 3,
-    "question": "What will be the output of: print(2**3**2) in Python?",
-    "options": [
-      "64",
-      "512",
-      "256",
-      "16"
-    ],
+    "question": "Who is credited with the creation of Bitcoin?",
+    "options": ["Vitalik Buterin", "Satoshi Nakamoto", "Charlie Lee", "Gavin Andresen"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q4",
     "question_no": 4,
-    "question": "If A = 1, B = 2, ..., Z = 26, then what is the sum of the letters in 'CAT'?",
-    "options": [
-      "24",
-      "26",
-      "27",
-      "29"
-    ],
-    "correct_answer": 3,
+    "question": "What does 'decentralization' mean in blockchain?",
+    "options": ["Data is stored on a single server", "Control is shared across a network", "Only miners have control", "A government controls the data"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q5",
     "question_no": 5,
-    "question": "Which planet rotates from east to west unlike most others?",
-    "options": [
-      "Venus",
-      "Jupiter",
-      "Saturn",
-      "Mars"
-    ],
-    "correct_answer": 1,
+    "question": "What type of database structure does a blockchain use?",
+    "options": ["Hierarchical", "Linked list", "Chain of blocks", "Relational table"],
+    "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q6",
     "question_no": 6,
-    "question": "If 5 cats catch 5 rats in 5 minutes, how long will 1 cat take to catch 1 rat?",
-    "options": [
-      "1 minute",
-      "5 minutes",
-      "25 minutes",
-      "Cannot be determined"
-    ],
+    "question": "What is a 'block' in blockchain?",
+    "options": ["A smart contract", "A container of transactions", "A piece of hardware", "A mining algorithm"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q7",
     "question_no": 7,
-    "question": "Which data structure works on the principle of Last In, First Out?",
-    "options": [
-      "Queue",
-      "Stack",
-      "Linked List",
-      "Tree"
-    ],
+    "question": "Which consensus algorithm does Bitcoin use?",
+    "options": ["Proof of Stake", "Proof of Work", "Delegated Proof of Stake", "Proof of Authority"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q8",
     "question_no": 8,
-    "question": "In a code, if CAT = DBU, what is DOG in the same code?",
-    "options": [
-      "EPH",
-      "EOG",
-      "ENH",
-      "DPH"
-    ],
-    "correct_answer": 1,
+    "question": "What is a 'hash' in blockchain?",
+    "options": ["A random number", "A digital fingerprint of data", "An encryption key", "A signature algorithm"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q9",
     "question_no": 9,
-    "question": "Which historical event happened first?",
-    "options": [
-      "American Revolution",
-      "French Revolution",
-      "World War I",
-      "Russian Revolution"
-    ],
-    "correct_answer": 1,
+    "question": "Which function does the SHA-256 algorithm perform in Bitcoin?",
+    "options": ["Mining reward distribution", "Transaction verification", "Hashing", "Consensus formation"],
+    "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q10",
     "question_no": 10,
-    "question": "A clock shows 3:15. What is the angle between the hour and minute hands?",
-    "options": [
-      "7.5°",
-      "15°",
-      "30°",
-      "37.5°"
-    ],
-    "correct_answer": 4,
+    "question": "What happens when a block is added to the blockchain?",
+    "options": ["It replaces older blocks", "It is linked to the previous block", "It resets the chain", "It deletes the genesis block"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q11",
     "question_no": 11,
-    "question": "Which river flows through the Grand Canyon?",
-    "options": [
-      "Mississippi",
-      "Colorado",
-      "Amazon",
-      "Rio Grande"
-    ],
+    "question": "What is a 'genesis block'?",
+    "options": ["The last block", "The first block", "A smart contract", "A mining pool"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q12",
     "question_no": 12,
-    "question": "Who invented the printing press?",
-    "options": [
-      "Isaac Newton",
-      "Johannes Gutenberg",
-      "Galileo Galilei",
-      "Leonardo da Vinci"
-    ],
-    "correct_answer": 2,
+    "question": "Which of these is a Layer 2 scaling solution for Ethereum?",
+    "options": ["Polygon", "Solana", "Avalanche", "Bitcoin Cash"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q13",
     "question_no": 13,
-    "question": "What will be the output of: print(10//3)?",
-    "options": [
-      "3",
-      "3.3",
-      "4",
-      "Error"
-    ],
-    "correct_answer": 1,
+    "question": "What is the main benefit of using smart contracts?",
+    "options": ["They require lawyers", "They execute automatically when conditions are met", "They store images", "They slow down transactions"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q14",
     "question_no": 14,
-    "question": "If 3x + 2 = 11, what is x?",
-    "options": [
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "correct_answer": 3,
+    "question": "Which blockchain introduced smart contracts?",
+    "options": ["Bitcoin", "Ethereum", "Cardano", "Ripple"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q15",
     "question_no": 15,
-    "question": "Which continent has no permanent human population?",
-    "options": [
-      "Antarctica",
-      "Australia",
-      "Asia",
-      "Europe"
-    ],
+    "question": "What does 'gas fee' mean in Ethereum?",
+    "options": ["Transaction fee", "Network storage cost", "Smart contract reward", "Mining penalty"],
     "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q16",
     "question_no": 16,
-    "question": "In a code, FLOWER is written as GMQXFS. How is GARDEN written?",
-    "options": [
-      "HBSFBO",
-      "HBSFEP",
-      "HBSFEN",
-      "HASFEP"
-    ],
-    "correct_answer": 2,
+    "question": "What is an NFT?",
+    "options": ["Non-Fungible Token", "Network Function Token", "Node Functional Test", "New Financial Tool"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q17",
     "question_no": 17,
-    "question": "Which of the following languages is compiled and interpreted?",
-    "options": [
-      "C",
-      "Python",
-      "Java",
-      "C++"
-    ],
-    "correct_answer": 3,
+    "question": "Which of the following best describes a 'miner'?",
+    "options": ["A user who validates transactions", "A blockchain developer", "A hardware manufacturer", "A token trader"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q18",
     "question_no": 18,
-    "question": "The Battle of Plassey was fought in which year?",
-    "options": [
-      "1757",
-      "1764",
-      "1857",
-      "1707"
-    ],
-    "correct_answer": 1,
+    "question": "What does a private key provide access to?",
+    "options": ["Public blockchain", "User’s wallet and funds", "Mining node", "Consensus layer"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q19",
     "question_no": 19,
-    "question": "If MONDAY = 65, then what is FRIDAY?",
-    "options": [
-      "63",
-      "70",
-      "71",
-      "68"
-    ],
-    "correct_answer": 4,
+    "question": "What is a DAO in blockchain?",
+    "options": ["Distributed App Object", "Decentralized Autonomous Organization", "Digital Asset Offering", "Data Access Operation"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q20",
     "question_no": 20,
-    "question": "Which layer of the Earth contains the tectonic plates?",
-    "options": [
-      "Core",
-      "Mantle",
-      "Crust",
-      "Inner Core"
-    ],
+    "question": "Which of the following is NOT a consensus mechanism?",
+    "options": ["Proof of Authority", "Proof of Work", "Proof of Time", "Proof of Stake"],
     "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q21",
     "question_no": 21,
-    "question": "Which function in Python converts a string to lowercase?",
-    "options": [
-      "lower()",
-      "tolower()",
-      "toLowerCase()",
-      "smallcase()"
-    ],
-    "correct_answer": 1,
+    "question": "What does 'immutability' mean in blockchain?",
+    "options": ["Data can be easily edited", "Data cannot be changed once recorded", "Nodes are mutable", "Smart contracts can self-destruct"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q22",
     "question_no": 22,
-    "question": "Which of these Indian rulers built the Red Fort in Delhi?",
-    "options": [
-      "Akbar",
-      "Shah Jahan",
-      "Humayun",
-      "Aurangzeb"
-    ],
-    "correct_answer": 2,
+    "question": "What is 'tokenization' in blockchain?",
+    "options": ["Creating digital tokens to represent assets", "Mining new blocks", "Encrypting transactions", "Destroying NFTs"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q23",
     "question_no": 23,
-    "question": "If 12 men can build a wall in 6 days, how many days will 6 men take?",
-    "options": [
-      "3",
-      "6",
-      "9",
-      "12"
-    ],
-    "correct_answer": 4,
+    "question": "Which of these is a public blockchain?",
+    "options": ["Hyperledger Fabric", "Corda", "Ethereum", "Quorum"],
+    "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q24",
     "question_no": 24,
-    "question": "Which ocean is the largest on Earth?",
-    "options": [
-      "Atlantic Ocean",
-      "Indian Ocean",
-      "Arctic Ocean",
-      "Pacific Ocean"
-    ],
-    "correct_answer": 4,
+    "question": "What is a 'node' in blockchain?",
+    "options": ["A physical computer in the network", "A type of smart contract", "A digital wallet", "An oracle service"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q25",
     "question_no": 25,
-    "question": "Which keyword is used to define a function in Python?",
-    "options": [
-      "func",
-      "function",
-      "def",
-      "lambda"
-    ],
-    "correct_answer": 3,
+    "question": "Which blockchain uses the 'Solidity' programming language?",
+    "options": ["Bitcoin", "Ethereum", "Polkadot", "Cardano"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q26",
     "question_no": 26,
-    "question": "If in a code, TREE = USFF, then PLANT = ?",
-    "options": [
-      "QMBOV",
-      "QMBNU",
-      "QMBNT",
-      "QMBMU"
-    ],
-    "correct_answer": 2,
+    "question": "What is a 'fork' in blockchain?",
+    "options": ["A split in the network leading to different versions", "A new mining algorithm", "A type of NFT", "A new node"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q27",
     "question_no": 27,
-    "question": "Which country is known as the Land of the Rising Sun?",
-    "options": [
-      "China",
-      "Japan",
-      "South Korea",
-      "Thailand"
-    ],
+    "question": "What is a 'Merkle Tree' used for?",
+    "options": ["Encrypting transactions", "Efficient verification of data", "Gas optimization", "Smart contract deployment"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q28",
     "question_no": 28,
-    "question": "In which year did World War II begin?",
-    "options": [
-      "1937",
-      "1939",
-      "1941",
-      "1945"
-    ],
+    "question": "Which of the following is a blockchain explorer?",
+    "options": ["MetaMask", "Etherscan", "OpenSea", "Coinbase"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q29",
     "question_no": 29,
-    "question": "Which of the following is NOT a programming paradigm?",
-    "options": [
-      "Object-Oriented",
-      "Functional",
-      "Structural",
-      "Chemical"
-    ],
-    "correct_answer": 4,
+    "question": "What is the smallest unit of Bitcoin?",
+    "options": ["Microbit", "Sat", "Satoshi", "NanoBTC"],
+    "correct_answer": 3,
     "status": "pending"
   },
   {
     "id": "q30",
     "question_no": 30,
-    "question": "If 9 + 3 = 93 and 8 + 4 = 84, then 7 + 5 = ?",
-    "options": [
-      "57",
-      "75",
-      "70",
-      "60"
-    ],
+    "question": "Which of these best defines 'DeFi'?",
+    "options": ["Digital Finance", "Decentralized Finance", "Defined Finance", "Delegated Finance"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q31",
     "question_no": 31,
-    "question": "Who discovered penicillin?",
-    "options": [
-      "Alexander Fleming",
-      "Louis Pasteur",
-      "Marie Curie",
-      "Isaac Newton"
-    ],
+    "question": "What is the function of 'oracles' in blockchain?",
+    "options": ["Connect blockchain to external data sources", "Store data", "Execute smart contracts", "Mint tokens"],
     "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q32",
     "question_no": 32,
-    "question": "Which planet is known as the Morning Star?",
-    "options": [
-      "Mercury",
-      "Venus",
-      "Mars",
-      "Neptune"
-    ],
+    "question": "Which blockchain platform is known for its focus on interoperability?",
+    "options": ["Ethereum", "Polkadot", "Solana", "Avalanche"],
     "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q33",
     "question_no": 33,
-    "question": "This extract points to which unique location of the campus?\n\nTwo roads diverged in a yellow wood,\nAnd sorry I could not travel both\nAnd be one traveler, long I stood\nAnd looked down one as far as I could\nTo where it bent in the undergrowth;",
-    "options": [
-      "SAC",
-      "NFG",
-      "RNT",
-      "OFG"
-    ],
-    "correct_answer": 3,
+    "question": "What is 'staking'?",
+    "options": ["Lending crypto", "Locking tokens to support the network", "Buying NFTs", "Burning coins"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q34",
     "question_no": 34,
-    "question": "How many acad blocks are there in campus?",
-    "options": [
-      "9",
-      "10",
-      "11",
-      "12"
-    ],
-    "correct_answer": 3,
+    "question": "Which type of blockchain is permissionless?",
+    "options": ["Private blockchain", "Public blockchain", "Consortium blockchain", "Hybrid blockchain"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q35",
     "question_no": 35,
-    "question": "Which of the following books has the reference of an object in the campus?",
-    "options": [
-      "The Philosopher’s Stone",
-      "Prisoner of Azkaban",
-      "Goblet of Fire",
-      "Half-Blood Prince"
-    ],
-    "correct_answer": 1,
+    "question": "What is the main goal of a consensus mechanism?",
+    "options": ["To create smart contracts", "To agree on the validity of transactions", "To speed up mining", "To reduce fees"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q36",
     "question_no": 36,
-    "question": "Which of the following places in the campus represent a music band?",
-    "options": [
-      "Bleachers",
-      "SAC",
-      "NAB",
-      "OFG"
-    ],
-    "correct_answer": 1,
+    "question": "Which of the following describes 'block time'?",
+    "options": ["Time to validate a transaction", "Time taken to create a new block", "Total uptime of a node", "Transaction delay"],
+    "correct_answer": 2,
     "status": "pending"
   },
   {
     "id": "q37",
     "question_no": 37,
-    "question": "Which acad block closely relates to the series “Breaking Bad”?",
-    "options": [
-      "A block",
-      "B block",
-      "C block",
-      "D block"
-    ],
-    "correct_answer": 2,
+    "question": "What is 'double spending' in blockchain?",
+    "options": ["Using the same crypto twice", "Mining two blocks at once", "Duplicating smart contracts", "Using two wallets"],
+    "correct_answer": 1,
     "status": "pending"
   },
   {
     "id": "q38",
     "question_no": 38,
-    "question": "You study blockchain, I am the clue,\nBut I’ve existed long before crypto grew.\nI decide power, vote, and fame —\nGuess what system BITS already had by name.",
-    "options": [
-      "SU COUNCIL",
-      "CRC",
-      "TECH SENATE",
-      "SPORTS SENATE"
-    ],
+    "question": "Which blockchain feature ensures transparency?",
+    "options": ["Encrypted ledgers", "Public accessibility of records", "Anonymous validators", "Private nodes"],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q39",
+    "question_no": 39,
+    "question": "What is a 'wallet address'?",
+    "options": ["An email-like identifier for crypto transfers", "A node’s IP address", "A private key", "A smart contract hash"],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q40",
+    "question_no": 40,
+    "question": "Which organization manages Bitcoin?",
+    "options": ["Bitcoin Foundation", "No central authority", "World Bank", "Satoshi Labs"],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q41",
+    "question_no": 41,
+    "question": "What is the role of 'validators' in Proof of Stake?",
+    "options": ["To verify and add new blocks", "To mine Bitcoin", "To issue tokens", "To build dApps"],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q42",
+    "question_no": 42,
+    "question": "Which of these is a blockchain interoperability protocol?",
+    "options": ["Chainlink", "Polkadot", "Uniswap", "Aave"],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q43",
+    "question_no": 43,
+    "question": "What is 'halving' in Bitcoin?",
+    "options": ["Reducing block size", "Reducing miner reward by half", "Splitting transactions", "Resetting difficulty"],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q44",
+    "question_no": 44,
+    "question": "What is the maximum supply of Bitcoin?",
+    "options": ["21 million", "50 million", "100 million", "Unlimited"],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q45",
+    "question_no": 45,
+    "question": "Which of these is a decentralized exchange (DEX)?",
+    "options": ["Binance", "Coinbase", "Uniswap", "Robinhood"],
+    "correct_answer": 3,
+    "status": "pending"
+  },
+  {
+    "id": "q46",
+    "question_no": 46,
+    "question": "What is 'sharding' in blockchain?",
+    "options": ["Splitting data into smaller pieces for scalability", "Mining optimization", "Data encryption", "Creating NFTs"],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q47",
+    "question_no": 47,
+    "question": "Which type of attack attempts to control over 50% of the network?",
+    "options": ["Sybil attack", "51% attack", "Replay attack", "Phishing"],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q48",
+    "question_no": 48,
+    "question": "What is the main advantage of blockchain for supply chain management?",
+    "options": ["Lower costs", "Transparency and traceability", "Faster marketing", "Improved marketing"],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q49",
+    "question_no": 49,
+    "question": "Which blockchain feature enables auditability?",
+    "options": ["Transparency of records", "Private transactions", "Centralized control", "Off-chain storage"],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q50",
+    "question_no": 50,
+    "question": "What is the primary benefit of blockchain in finance?",
+    "options": ["Decentralized transactions without intermediaries", "Higher transaction fees", "Slower processing", "Central bank control"],
     "correct_answer": 1,
     "status": "pending"
   }

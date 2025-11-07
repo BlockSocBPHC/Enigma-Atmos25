@@ -65,13 +65,17 @@ const Navbar = () => {
             <div className="absolute right-0 mt-2 w-74 bg-gray-800 text-gray-200 rounded-md shadow-lg border border-gray-700 p-4 text-sm animate-fade-in">
               <h3 className="font-bold text-lg mb-2">Rules</h3>
               <ul className="list-disc pl-4 space-y-1">
-                <li>Final Score will be Weighted Addition of Tokens left and Rewards Earned.</li>
+                {/* <li>Final Score will be Weighted Addition of Tokens left and Rewards Earned.</li>
                 <li>Game ends if you runs out of tokens.</li>
                 <li>Correct answer turns block green.</li>
                 <li>Wrong answer turns block red.</li>
                 <li>Unanswered block stays Grey.</li>
                 <li>Player with highest final score wins.</li>
-                <li>You can convert rewards earned into token</li>
+                <li>You can convert rewards earned into token</li> */}
+                <li>All da Best guys.</li>
+                <li>Ana toh chahiye.</li>
+                <li>Never Gonna Give You Up.</li>
+                <li>Never gonna let you down.</li>
               </ul>
             </div>
           )}

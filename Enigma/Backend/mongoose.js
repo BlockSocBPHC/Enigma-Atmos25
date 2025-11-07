@@ -59,7 +59,7 @@ const UserSchema = new Schema({
   email: { type: String, default: "" },
   firstName: { type: String, default: "" },
   started: { type: Boolean, default: false },
-  tokens: { type: Number, default: 3000 },
+  tokens: { type: Number, default: 4500 },
   rewards: { type: Number, default: 0 },
   points: { type: Number, default: 0 },
   questions: { type: Object, default: [] },
