@@ -4,7 +4,7 @@ const AdminPage = () => {
   const [ranking, setRanking] = useState([]);
 
   const getRank = async () => {
-    const res = await fetch("http://localhost:4000/getranking", {
+    const res = await fetch("/getranking", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
