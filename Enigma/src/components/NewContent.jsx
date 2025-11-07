@@ -4,8 +4,10 @@ import './Questions.css'
 import { CurrentQuestion } from '../Hooks/CurrentQuestion.js';
 import { AuthContext } from '../Context/AuthProvider.jsx';
 import { StartContext } from '../Hooks/StartContext.js';
+import { useNavigate } from 'react-router-dom';
 
 const NewContent = () => {
+    const navigate= useNavigate()
     const { token } = useContext(AuthContext);
     const { start, setStart } = useContext(StartContext);
     const { currentQuestion, setCurrentQuestion } = useContext(CurrentQuestion);
