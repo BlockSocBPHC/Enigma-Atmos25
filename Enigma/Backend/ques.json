@@ -415,4 +415,85 @@
     "correct_answer": 2,
     "status": "pending"
   }
+  [
+  {
+    "id": "q33",
+    "question_no": 33,
+    "question": "This extract points to which unique location of the campus?\n\nTwo roads diverged in a yellow wood,\nAnd sorry I could not travel both\nAnd be one traveler, long I stood\nAnd looked down one as far as I could\nTo where it bent in the undergrowth;",
+    "options": [
+      "SAC",
+      "NFG",
+      "RNT",
+      "OFG"
+    ],
+    "correct_answer": 3,
+    "status": "pending"
+  },
+  {
+    "id": "q34",
+    "question_no": 34,
+    "question": "How many acad blocks are there in campus?",
+    "options": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "correct_answer": 3,
+    "status": "pending"
+  },
+  {
+    "id": "q35",
+    "question_no": 35,
+    "question": "Which of the following books has the reference of an object in the campus?",
+    "options": [
+      "The Philosopher’s Stone",
+      "Prisoner of Azkaban",
+      "Goblet of Fire",
+      "Half-Blood Prince"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q36",
+    "question_no": 36,
+    "question": "Which of the following places in the campus represent a music band?",
+    "options": [
+      "Bleachers",
+      "SAC",
+      "NAB",
+      "OFG"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  },
+  {
+    "id": "q37",
+    "question_no": 37,
+    "question": "Which acad block closely relates to the series “Breaking Bad”?",
+    "options": [
+      "A block",
+      "B block",
+      "C block",
+      "D block"
+    ],
+    "correct_answer": 2,
+    "status": "pending"
+  },
+  {
+    "id": "q38",
+    "question_no": 38,
+    "question": "You study blockchain, I am the clue,\nBut I’ve existed long before crypto grew.\nI decide power, vote, and fame —\nGuess what system BITS already had by name.",
+    "options": [
+      "SU COUNCIL",
+      "CRC",
+      "TECH SENATE",
+      "SPORTS SENATE"
+    ],
+    "correct_answer": 1,
+    "status": "pending"
+  }
+]
+
 ]
