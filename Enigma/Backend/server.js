@@ -5,6 +5,11 @@ import { UserData } from "./mongoose.js";
 import jwt from "jsonwebtoken";
 import { AdminData } from "./mongoose.js";
 import addRandomQuestion from "./utils/randomquestion.js";
+import path from "path"; //dekhlo
+import { fileURLToPath } from "url";  // idk
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 // const PORT = 4000;
@@ -251,7 +256,18 @@ app.get('/getuserdata', authenticateToken, async (req,res) => {
 
 // app.listen(PORT, () => console.log(`✅ Backend running on http://localhost:${PORT}`));
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, '0.0.0.0', () => {
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
+// const PORT = process.env.PORT || 4000;
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`✅ Backend running on port ${PORT}`);
+// });
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
   console.log(`✅ Backend running on port ${PORT}`);
 });
