@@ -13,7 +13,7 @@ function App() {
   const handleSuccess = async (credentialResponse) => {
     if (credentialResponse.credential) {
       const user = jwtDecode(credentialResponse.credential);
-      const res = await fetch("http://localhost:4000/login", {
+      const res = await fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
