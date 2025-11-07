@@ -7,7 +7,7 @@ import { AdminData } from "./mongoose.js";
 import addRandomQuestion from "./utils/randomquestion.js";
 
 const app = express();
-const PORT = 4000;
+// const PORT = 4000;
 
 dotenv.config();
 
@@ -249,4 +249,9 @@ app.get('/getuserdata', authenticateToken, async (req,res) => {
 })
 
 
-app.listen(PORT, () => console.log(`✅ Backend running on http://localhost:${PORT}`));
+// app.listen(PORT, () => console.log(`✅ Backend running on http://localhost:${PORT}`));
+
+// const PORT = process.env.PORT || 4000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Backend running on port ${PORT}`);
+});
